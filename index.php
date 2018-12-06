@@ -19,15 +19,14 @@
        //           $_SESSION['logado'] == TRUE ) {
 	   //require_once 'menu.php';
     ?>
-	<img src="download.jpg" />
 	<div id="header"><li>   <a href="index.php">
         Inicio</a></li>	
 
  <li>   <a href="equipamentos.php">
         Equipamentos</a>	</li> 
- <li>   <a href="Servidores.php">
+ <li>   <a href="servidores.php">
         Servidores</a></li>
-<li> <a href="Rede.php">
+<li> <a href="rede.php">
         Rede</a></li>
 <?php
  echo '<a href="sair.php"><button class="button">Sair</button></a>'
