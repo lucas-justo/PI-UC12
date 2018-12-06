@@ -1,0 +1,81 @@
+
+body {	background-color: #f9f7f8; text-align: center; }
+
+#container {
+	
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	
+}
+
+h1 {
+	
+	font-family: "Consolas";
+	color: #cc76ba;
+	
+}
+
+
+li {
+	
+
+	padding: 16px;
+	padding-left: 34px;
+	padding-right: 34px;
+	margin: 2px;
+	background-color: #edb79e;
+	color:#cedaed;
+	text-align: center;
+	list-style: none;
+
+}
+
+a {
+	font-family: "Consolas";
+	color: #b74e49;
+	text-decoration: none;
+}
+
+a:hover {
+	font-family: "Consolas";
+	color: #cc76ba;
+	text-decoration: underline;
+}
+
+#header{
+	
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	
+}
+
+hr {
+	
+	background-color: #f2c6e9;
+	height: 1px;
+	margin: 10px;
+	
+}
+
+
+.button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+    border-radius:12px;
+  font-size: 16px;
+  padding: 16px;
+	padding-left: 34px;
+	padding-right: 34px;
+}
+
+.button:hover {
+  background-color: #c7dd90; /* Green */
+  color: white;
+}
+
+
+
