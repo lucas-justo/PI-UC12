@@ -8,41 +8,34 @@
 <head>
 	<link rel="stylesheet" href="styles.css">
 	<meta charset="UTF-8">
-    <title>Portal Web AGERGS</title>
+    <title>Portal Web</title>
 </head>
 
 <body>
+
 <div id="container">
 
 <?php
-       // if( isset($_SESSION['logado']) && 
-       //           $_SESSION['logado'] == TRUE ) {
-	   //require_once 'menu.php';
+        if( isset($_SESSION['logado']) && 
+                  $_SESSION['logado'] == TRUE ) {
     ?>
-	<div id="header"><li>   <a href="index.php">
-        Inicio</a></li>	
+	
+	<div id="header">
+<li class="menu">   <a href="index.php">       			 Inicio</a></li>	
+<li class="menu">   <a href="equipamentos.php">          Equipamentos</a></li> 
+<li class="menu">   <a href="servidores.php">       	 Servidores</a></li>
+<li class="menu"> <a href="rede.php">       			 Rede</a></li>
 
- <li>   <a href="equipamentos.php">
-        Equipamentos</a>	</li> 
- <li>   <a href="servidores.php">
-        Servidores</a></li>
-<li> <a href="rede.php">
-        Rede</a></li>
-<?php
- echo '<a href="sair.php"><button class="button">Sair</button></a>'
- ?>
+<a href="sair.php"><button class="button">Sair</button></a>
 
-</div>
+	</div>
 
-
-
-
+<img src="pancake.jpg"/>
 
    <?php
-     //   }else{
+        }else{
    ?>
-	<h1>Você não tem permissão para acessar o Portal, faça o login para continuar!</h1>
-
+	<h1>Você não tem permissão para acessar o Portal, faça login para continuar!</h1>
 
  <form action="entrar.php" method="POST" >
         <input type="text" name="txtLogin" required
@@ -54,9 +47,8 @@
         <input type="submit" value="Entrar" />
     </form>    
 
-	
     <?php
-    //    }
+        }
     ?>
 
 </div>

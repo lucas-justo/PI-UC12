@@ -1,37 +1,35 @@
 
-body {	background-color: #f9f7f8; text-align: center; }
+body {	background-color: #eff2ea; text-align: center; }
 
 #container {
-	
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
-	height: 100%;
-	
+	height: 100%;	
 }
 
 h1 {
-	
 	font-family: "Consolas";
-	color: #cc76ba;
-	
-	
+	color:#ba6084;
 }
 
 
-li {
-	
-
+.menu {
 	padding: 16px;
 	padding-left: 34px;
 	padding-right: 34px;
-	margin: 2px;
+	margin: 4px;
 	background-color: #edb79e;
 	color:#cedaed;
 	text-align: center;
 	list-style: none;
 
+}
+
+.menu:hover{
+	
+	background-color:#f7c2aa;
 }
 
 a {
@@ -46,36 +44,36 @@ a:hover {
 	text-decoration: underline;
 }
 
-#header{
-	
+#header{	
 	display: flex;
-	justify-content: center;
+	align-items: center;
 	flex-direction: row;
-	
+	flex-wrap: nowrap;
 }
 
-hr {
-	
+hr {	
 	background-color: #f2c6e9;
 	height: 1px;
-	margin: 10px;
-	
+	margin: 10px;	
 }
 
 
 .button {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-    border-radius:12px;
-  font-size: 16px;
-  padding: 16px;
-	padding-left: 34px;
-	padding-right: 34px;
+border-radius: 8px;
+font-size: 16px;
+padding: 16px;
+padding-left: 34px;
+padding-right: 34px;
+background-color: #bbce9a;
+color: #191e1a;
+font-family: "Consolas";
+font-size: 14px;	
+margin-left: 2px; 
 }
 
 .button:hover {
-  background-color: #c7dd90; /* Green */
-  color: white;
+  background-color: #c7dd90; 
+   color: #455448;
 }
 
 
