@@ -12,7 +12,7 @@ class Computador {
     private $PCDESCRICAO;
     
     public function __construct( $ID = NULL, $PCSETOR = NULL, $PCCARGO = NULL,
-            $PCNOME = NULL, $PCNOMEANTIGO = NULL, $PCMODELO = NULL, $PCMODELOANTIGO = NULL, $ID = NULL,
+            $PCNOME = NULL, $PCNOMEANTIGO = NULL, $PCMODELO = NULL, $PCMODELOANTIGO = NULL,
             $PCPATRIMONIO = NULL, $PCDESCRICAO = NULL ){
         
     }

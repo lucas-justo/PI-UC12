@@ -23,12 +23,16 @@ if( isset($_SESSION['logado']) &&
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
  <li  class="menu" >   <a href="Servidores.php">        Servidores</a></li>
  <li  class="menu" > <a href="Rede.php">			    Rede</a></li>
+<li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
 
 <a href="sair.php"><button class="button">Sair</button></a>
 
 	</div>
-
 	
+<div id="menu2">
+<li  class="menu2" >   <a href="computadores.php">Computadores</a></li> 
+<li  class="menu2" >   <a href="monitores.php">Monitores</a></li> 	
+</div> 
 	
 <?php
         }else{

@@ -1,5 +1,5 @@
 <?php
-    include_once 'dao/clsConexaoDAO.php';
+    include_once 'dao/clsConexao.php';
 
     $login = $_POST['txtLogin'];
     $senha = $_POST['txtSenha'];
@@ -31,7 +31,7 @@
 	
     
     if( $dados == NULL ){
-        echo '<body onload="window.history.back()" >';
+       echo '<body onload="window.history.back()" >';
     } else {
         session_start();
         $_SESSION['logado'] = TRUE;
