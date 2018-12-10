@@ -13,11 +13,12 @@ if( isset( $_REQUEST['inserir'] ) ){
 	$computador->setPCMODELOANTIGO( $_POST['txtModeloAntigo']  );
 	$computador->setPCPATRIMONIO( $_POST['txtPatrimonio']  );
 	$computador->setPCCARGO( $_POST['txtCargo']  );
+	$computador->setPCRESPONSAVEL( $_POST['txtResponsavel']  );
 	$computador->setPCDESCRICAO( $_POST['txtDesc']  );
     
     ComputadorDAO::inserir($computador);
     
-    header("Location: ../servidores.php");
+    header("Location: ../computadores.php");
 }
 
 if( isset($_REQUEST['editar'])){
@@ -32,11 +33,12 @@ if( isset($_REQUEST['editar'])){
 	$computador->setPCMODELOANTIGO( $_POST['txtModeloAntigo']  );
 	$computador->setPCPATRIMONIO( $_POST['txtPatrimonio']  );
 	$computador->setPCCARGO( $_POST['txtCargo']  );
+	$computador->setPCRESPONSAVEL( $_POST['txtResponsavel']  );
 	$computador->setPCDESCRICAO( $_POST['txtDesc']  );
     
     ComputadorDAO::editar($computador);
     
-  //  header("Location: ../servidores.php");
+    header("Location: ../computadores.php");
     
 }
 

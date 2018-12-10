@@ -4,8 +4,9 @@ class ComputadorDAO {
 	
 	public static function inserir($computador) {
 		  $sql = "INSERT INTO COMPUTADORES "
-                . " ( PCCARGO , PCSETOR , PCNOME , PCNOMEANTIGO , PCMODELO , PCMODELOANTIGO , PCPATRIMONIO , PCDESCRICAO) VALUES "
+                . " ( PCCARGO , PCRESPONSAVEL , PCSETOR , PCNOME , PCNOMEANTIGO , PCMODELO , PCMODELOANTIGO , PCPATRIMONIO , PCDESCRICAO) VALUES "
                 . " ( '" . $computador->getPCCARGO()."' , "
+				. "  '" . $computador->getPCRESPONSAVEL()."' , "
 				. "  '" . $computador->getPCSETOR()."' , "
 				. "  '" . $computador->getPCNOME()."' , "
 				. "  '" . $computador->getPCNOMEANTIGO()."' , "
@@ -21,6 +22,7 @@ class ComputadorDAO {
         $sql =    "UPDATE COMPUTADORES SET "
                 . " PCNOME = '".$computador->getPCNOME()."' "
 				. " PCCARGO = '".$computador->getPCCARGO()."' "
+				. " PCRESPONSAVEL = '".$computador->getPCRESPONSAVEL()."' "
 				. " PCSETOR = '".$computador->getPCSETOR()."' "
 				. " PCNOMEANTIGO = '".$computador->getPCNOMEANTIGO()."' "
 				. " PCMODELO = '".$computador->getPCMODELO()."' "
@@ -39,14 +41,15 @@ class ComputadorDAO {
     }
 	
 	public static function getComputadores(){
-        $sql = "SELECT ID, PCCARGO , PCSETOR , PCNOME , PCNOMEANTIGO , PCMODELO , PCMODELOANTIGO , PCPATRIMONIO , PCDESCRICAO  FROM COMPUTADORES ORDER BY PCNOME";
+        $sql = "SELECT ID, PCCARGO , PCSETOR , PCRESPONSAVEL , PCNOME , PCNOMEANTIGO , PCMODELO , PCMODELOANTIGO , PCPATRIMONIO , PCDESCRICAO  FROM COMPUTADORES ORDER BY PCNOME";
         $result = Conexao::consultar($sql);
         $lista = new ArrayObject();
         if( $result != NULL ){
-            while( list($_ID, $_PCCARGO , $_PCSETOR , $_PCNOME , $_PCNOMEANTIGO , $_PCMODELO , $_PCMODELOANTIGO , $_PCPATRIMONIO , $_PCDESCRICAO ) = mysqli_fetch_row($result) ){
+            while( list($_ID, $_PCCARGO , $_PCSETOR , $_PCRESPONSAVEL , $_PCNOME , $_PCNOMEANTIGO , $_PCMODELO , $_PCMODELOANTIGO , $_PCPATRIMONIO , $_PCDESCRICAO ) = mysqli_fetch_row($result) ){
                 $computadores = new Computador();
                 $computadores->setID($_ID);
                 $computadores->setPCCARGO($_PCCARGO);
+				$computadores->setPCRESPONSAVEL($_PCRESPONSAVEL);
 				$computadores->setPCSETOR($_PCSETOR);
 				$computadores->setPCNOME($_PCNOME);
 				$computadores->setPCNOMEANTIGO($_PCNOMEANTIGO);
@@ -61,17 +64,18 @@ class ComputadorDAO {
     }
 	
 	 public static function getComputadorById( $id ){
-        $sql = " SELECT ID , PCCARGO , PCSETOR , PCNOME , PCNOMEANTIGO , PCMODELO , PCMODELOANTIGO , PCPATRIMONIO , PCDESCRICAO  "
+        $sql = " SELECT ID , PCCARGO , PCRESPONSAVEL , PCSETOR , PCNOME , PCNOMEANTIGO , PCMODELO , PCMODELOANTIGO , PCPATRIMONIO , PCDESCRICAO  "
              . " FROM COMPUTADORES "
              . " WHERE ID = ".$id
              . " ORDER BY PCNOME ";
         
         $result = Conexao::consultar($sql);
       
-        list( $_ID, $_PCCARGO , $_PCSETOR , $_PCNOME , $_PCNOMEANTIGO , $_PCMODELO , $_PCMODELOANTIGO , $_PCPATRIMONIO , $_PCDESCRICAO ) = mysqli_fetch_row($result);
+        list( $_ID, $_PCCARGO , $_PCRESPONSAVEL , $_PCSETOR , $_PCNOME , $_PCNOMEANTIGO , $_PCMODELO , $_PCMODELOANTIGO , $_PCPATRIMONIO , $_PCDESCRICAO ) = mysqli_fetch_row($result);
                 $computador = new Computador();
                 $computador->setID($_ID);
                 $computador->setPCCARGO($_PCCARGO);
+				$computador->setPCRESPONSAVEL($_PCRESPONSAVEL);
 				$computador->setPCSETOR($_PCSETOR);
 				$computador->setPCNOME($_PCNOME);
 				$computador->setPCNOMEANTIGO($_PCNOMEANTIGO);

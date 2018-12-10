@@ -25,10 +25,14 @@ if( isset( $_REQUEST['inserir'] ) ){
 
 if( isset($_REQUEST['editar'])){
     
-    $id = $_REQUEST['idServidor'];
-    $servidor = ServidorDAO::getServidorById($id);
+	$servidor = new Servidor();
+	$servidor->setID( $_REQUEST['idServidor'] );
+	$servidor->setSERVNOME( $_POST['txtNome'] );
+	
+    //$id = $_REQUEST['idServidor'];
+    //$servidor = ServidorDAO::getServidorById($id);
 
-    $servidor->setSERVNOME( $_POST['txtNome']  );
+    //$servidor->setSERVNOME( $_POST['txtNome']  );
 	$servidor->setSERVIP( $_POST['txtIP']  );
 	$servidor->setSERVLOCALIZACAO( $_POST['txtLocal']  );
 	$servidor->setSERVCPU( $_POST['txtCPU']  );
@@ -40,10 +44,8 @@ if( isset($_REQUEST['editar'])){
 	$servidor->setSERVSERVICOS( $_POST['txtServ']  );
 	$servidor->setSERVDESCRICAO( $_POST['txtDesc']  );
     
-    ServidorDAO::editar($servidor);
-    
-  //  header("Location: ../servidores.php");
-    
+	ServidorDAO::editar($servidor);
+    header("Location: ../servidores.php");
 }
 
 if( isset($_REQUEST['excluir'])){

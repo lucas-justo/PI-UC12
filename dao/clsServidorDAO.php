@@ -76,8 +76,11 @@ class ServidorDAO {
              . " ORDER BY SERVNOME ";
         
         $result = Conexao::consultar($sql);
-      
-        list( $_ID, $_SERVIP , $_SERVLOCALIZACAO , $_SERVNOME , $_SERVCPU , $_SERVMEMORIA , $_SERVDISCO , $_SERVSISTEMA , $_SERVUSER , $_SERVSENHA , $_SERVDESCRICAO , $_SERVSERVICOS ) = mysqli_fetch_row($result);
+		$servidor = NULL;
+		
+		if( $result != NULL ){
+			
+			list( $_ID, $_SERVIP , $_SERVLOCALIZACAO , $_SERVNOME , $_SERVCPU , $_SERVMEMORIA , $_SERVDISCO , $_SERVSISTEMA , $_SERVUSER , $_SERVSENHA , $_SERVDESCRICAO , $_SERVSERVICOS ) = mysqli_fetch_row($result);
                 $servidor = new Servidor();
                 $servidor->setID($_ID);
                 $servidor->setSERVIP($_SERVIP);
@@ -92,7 +95,18 @@ class ServidorDAO {
 				$servidor->setSERVDESCRICAO($_SERVDESCRICAO);
 				$servidor->setSERVSERVICOS($_SERVSERVICOS);
             
+		}
+			
         return $servidor;
-    }
+    
+			
+			
+		}
+			
+			
+			
+		
+      
+        
 	
 }

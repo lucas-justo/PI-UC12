@@ -38,7 +38,7 @@ if( isset($_REQUEST['editar'])){
     
     MonitorDAO::editar($monitor);
     
-  //  header("Location: ../monitores.php");
+    header("Location: ../monitores.php");
     
 }
 

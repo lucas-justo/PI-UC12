@@ -49,7 +49,7 @@ class MonitorDAO {
                 $monitores = new Monitor();
                 $monitores->setID($_ID);
                 $monitores->setMTCARGO($_MTCARGO);
-				  $monitores->setMTCARGO($_MTRESPONSAVEL);
+				$monitores->setMTRESPONSAVEL($_MTRESPONSAVEL);
 				$monitores->setMTSETOR($_MTSETOR);
 				$monitores->setMTNOME($_MTNOME);
 				$monitores->setMTNOMEANTIGO($_MTNOMEANTIGO);
@@ -75,7 +75,7 @@ class MonitorDAO {
                 $monitor = new Monitor();
                 $monitor->setID($_ID);
                 $monitor->setMTCARGO($_MTCARGO);
-				$monitor->setMTCARGO($_MTRESNPONSAVEL);
+				$monitor->setMTRESPONSAVEL($_MTRESNPONSAVEL);
 				$monitor->setMTSETOR($_MTSETOR);
 				$monitor->setMTNOME($_MTNOME);
 				$monitor->setMTNOMEANTIGO($_MTNOMEANTIGO);

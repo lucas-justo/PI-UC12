@@ -2,6 +2,40 @@
 include_once 'model/clsServidor.php';
 include_once 'dao/clsServidorDAO.php';
 include_once 'dao/clsConexao.php';
+
+$ip = "";
+$nome = "";
+$local = "";
+$cpu = "";
+$memoria = "";
+$disco = "";
+$sistema = "";
+$servicos = "";
+$login = "";
+$senha = "";
+$descricao = "";
+
+$idServidor = 0;
+$action = "inserir";
+
+if( isset($_REQUEST['editar'])){
+    $idServidor = $_REQUEST['idServidor'];
+    $servidorEditar = ServidorDAO::getServidorById( $idServidor );
+	$ip = $servidorEditar->getSERVIP();
+    $nome = $servidorEditar->getSERVNOME();
+    $local = $servidorEditar->getSERVLOCALIZACAO();
+	$cpu = $servidorEditar->getSERVCPU();
+	$memoria = $servidorEditar->getSERVMEMORIA();
+	$disco = $servidorEditar->getSERVDISCO();
+	$sistema = $servidorEditar->getSERVSISTEMA();
+	$servicos = $servidorEditar->getSERVSERVICOS();
+	$login = $servidorEditar->getSERVUSER();
+	$senha = $servidorEditar->getSERVSENHA();
+	$descricao = $servidorEditar->getSERVDESCRICAO();
+    $action = "editar&idServidor=".$idServidor;
+    
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -36,34 +70,34 @@ if( isset($_SESSION['logado']) &&
 	</div>
 
 
-	<form action="controller/salvarServidor.php?inserir" method="POST" >
+	<form action="controller/salvarServidor.php?<?php echo $action; ?>" method="POST" >
 	
 		<div class="form_item">		
         <label>IP: </label>
-        <input type="text" autocomplete="off" name="txtIP" />
+        <input type="text" autocomplete="off" name="txtIP" value="<?php echo $ip; ?>" />
 		<label>Nome: </label>
-        <input type="text" autocomplete="off" name="txtNome" />
+		<input type="text" autocomplete="off" name="txtNome" value="<?php echo $nome; ?>" />
 		<label>Localizacao: </label>
-        <input type="text" autocomplete="off" name="txtLocal" />
+        <input type="text" autocomplete="off" name="txtLocal" value="<?php echo $local; ?>" />
 		<label>Numero de CPUs: </label>
-        <input type="number" autocomplete="off" name="txtCPU" value="4" />
+        <input type="number" autocomplete="off" name="txtCPU" value="<?php echo $cpu; ?>"  />
 		<label>Memoria: </label>
-        <input type="text" autocomplete="off" name="txtMemoria" />
+        <input type="text" autocomplete="off" name="txtMemoria" value="<?php echo $memoria; ?>" />
 		<label>Tamanho do HD: </label>
-        <input type="text" autocomplete="off" name="txtDisco" />
+        <input type="text" autocomplete="off" name="txtDisco" value="<?php echo $disco; ?>" />
 		<label>Sistema: </label>
-        <input type="text" autocomplete="off" name="txtSistema" />
+        <input type="text" autocomplete="off" name="txtSistema" value="<?php echo $sistema; ?>" />
 		<label>Servicos: </label>
-        <input type="text" autocomplete="off" name="txtServ" />		
+        <input type="text" autocomplete="off" name="txtServ" value="<?php echo $servicos; ?>" />		
 		</div>
 		
 		<div class="form_item">
 		<label>Login da Maquina: </label>
-        <input type="password" autocomplete="off" name="txtUser" />
+        <input type="password" autocomplete="off" name="txtUser" value="<?php echo $login; ?>"/>
 		<label>Senha da Maquina: </label>
-        <input type="password" autocomplete="off" name="txtPass" />
+        <input type="password" autocomplete="off" name="txtPass" value="<?php echo $senha; ?>"/>
 		<label>Descricao: </label>
-        <textarea id="descricao" name="txtDesc" > </textarea>
+        <textarea id="descricao" name="txtDesc"><?php echo $descricao;?></textarea>
 		</div>		
         <input class="button" type="submit" value="Salvar" />
 		</form>
@@ -112,7 +146,7 @@ if( isset($_SESSION['logado']) &&
 						<td>'.$servidor->getSERVDESCRICAO().'</td>
               
                         <td> 
-                            <a href="controller/salvarServidor.php?editar&idServidor='.$servidor->getID().'">
+                            <a href="?editar&idServidor='.$servidor->getId().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>

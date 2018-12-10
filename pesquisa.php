@@ -6,6 +6,10 @@ include_once 'dao/clsMonitorDAO.php';
 include_once 'dao/clsComputadorDAO.php';
 include_once 'dao/clsServidorDAO.php';
 include_once 'dao/clsConexao.php';
+include_once 'dao/clsPesquisaDAO.php';
+
+            $lista = '';
+
 ?>
 
 <!DOCTYPE HTML>
@@ -28,7 +32,9 @@ if( isset($_SESSION['logado']) &&
                   $_SESSION['logado'] == TRUE ) {
 ?>
 
-	<div id="header">
+
+
+<div id="header">
  <li  class="menu" >   <a href="index.php">        		Inicio</a></li>	
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
  <li  class="menu" >   <a href="servidores.php">        Servidores</a></li>
@@ -39,35 +45,29 @@ if( isset($_SESSION['logado']) &&
 
 	</div>
 	
+	<div class="form_item">		
+		
+	<!--	<form action="dao/PesquisaDAO.php?pesquisarNome" method="POST" > -->
+	<form action="controller/teste.php" method="POST" >
 		<div class="form_item">		
 		<label>Pesquisar por Nome: </label>
         <input type="text" autocomplete="off" name="txtNome" />
-		<?php echo '<a href="controller/pesquisarBanco.php?pesquisarNome&nome='.$monitor->getID().'"> <button class="button">Pesquisar</button></a>' ?>		
-		
 		<label>Pesquisar por Setor: </label>
         <input type="text" autocomplete="off" name="txtSetor" />
-		<?php //echo '<a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'"> <button class="button">Pesquisar</button></a>' ?>
-		
 		<label>Pesquisar por Modelo: </label>
-        <input type="text" autocomplete="off" name="txtModelo" />
-		<?php //echo '<a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'"> <button class="button">Pesquisar</button></a>' ?>
+		<input type="text" autocomplete="off" name="txtModelo" />
 		
-		<label>Pesquiar por Patrimonio: </label>
-        <input type="text" autocomplete="off" name="txtPatrimonio" />
-		<?php //echo '<a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'"> <button class="button">Pesquisar</button></a>' ?>
+		<input class="button" type="submit" value="Pesquisar" />
 		
-		<label>Pesquisar por Nome do Responsavel: </label>
-        <input type="text" autocomplete="off" name="txtResponsavel" />	
-		<?php //echo '<a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'"> <button class="button">Pesquisar</button></a>' ?>
+		</form>
 		
-		</div>
+	</div>
 		
 		<?php
-            
-            $lista = PesquisaDAO::pesquisarNome($nome);
+           
             
             if ( $lista->count()==0){
-                echo '<h2><b>Nenhum Monitor cadastrado</b></h2>';
+                echo '<h2><b>Nenhum resultado encontrado</b></h2>';
             }else {
         ?>
         
@@ -88,30 +88,34 @@ if( isset($_SESSION['logado']) &&
             </tr>
             
             <?php 
-                foreach ($lista as $monitor) {
+               	
+			 foreach ($lista as $servidor) {
                     echo '<tr>
-                        <td>'.$monitor->getID().'</td>
-						<td>'.$monitor->getMTSETOR().'</td>
-                        <td>'.$monitor->getMTNOME().'</td>
-						<td>'.$monitor->getMTMODELO().'</td>
-                        <td>'.$monitor->getMTNOMEANTIGO().'</td>
-						<td>'.$monitor->getMTMODELOANTIGO().'</td>
-						<td>'.$monitor->getMTPATRIMONIO().'</td>
-						<td>'.$monitor->getMTRESPONSAVEL().'</td>
-						<td>'.$monitor->getMTCARGO().'</td>
-						<td>'.$monitor->getMTDESCRICAO().'</td>
-                
+                        <td>'.$servidor->getID().'</td>
+                        <td>'.$servidor->getSERVIP().'</td>
+						<td>'.$servidor->getSERVLOCALIZACAO().'</td>
+						<td>'.$servidor->getSERVSISTEMA().'</td>
+                        <td>'.$servidor->getSERVNOME().'</td>
+						<td>'.$servidor->getSERVCPU().'</td>
+                        <td>'.$servidor->getSERVMEMORIA().'</td>
+						<td>'.$servidor->getSERVDISCO().'</td>
+						<td>'.$servidor->getSERVUSER().'</td>
+                        <td>'.$servidor->getSERVSENHA().'</td>
+						<td>'.$servidor->getSERVSERVICOS().'</td>
+						<td>'.$servidor->getSERVDESCRICAO().'</td>
+              
                         <td> 
-                            <a href="controller/salvarMonitor.php?editar&idMonitor='.$monitor->getID().'">
+                            <a href="controller/salvarServidor.php?editar&idServidor='.$servidor->getID().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
+                            <a href="controller/salvarServidor.php?excluir&idServidor='.$servidor->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
                 }								
 				
+						
 			}
 			
             ?>			
