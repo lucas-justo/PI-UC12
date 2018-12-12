@@ -4,6 +4,7 @@ class Computador {
     private $ID;
     private $PCSETOR;
     private $PCCARGO;
+	private $PCRESPONSAVEL;
     private $PCNOME;
     private $PCNOMEANTIGO;
     private $PCMODELO;
@@ -11,7 +12,7 @@ class Computador {
     private $PCPATRIMONIO;
     private $PCDESCRICAO;
     
-    public function __construct( $ID = NULL, $PCSETOR = NULL, $PCCARGO = NULL,
+    public function __construct( $ID = NULL, $PCSETOR = NULL, $PCCARGO = NULL, $PCRESPONSAVEL = NULL ,
             $PCNOME = NULL, $PCNOMEANTIGO = NULL, $PCMODELO = NULL, $PCMODELOANTIGO = NULL,
             $PCPATRIMONIO = NULL, $PCDESCRICAO = NULL ){
         
@@ -26,6 +27,10 @@ class Computador {
 
     function getPCCARGO() {
         return $this->PCCARGO;
+    }
+	
+	function getPCRESPONSAVEL() {
+        return $this->PCRESPONSAVEL;
     }
 
     function getPCNOME() {
@@ -62,6 +67,10 @@ class Computador {
 
     function setPCCARGO($PCCARGO) {
         $this->PCCARGO = $PCCARGO;
+    }
+	
+	function setPCRESPONSAVEL($PCRESPONSAVEL) {
+        $this->PCRESPONSAVEL = $PCRESPONSAVEL;
     }
 
     function setPCNOME($PCNOME) {

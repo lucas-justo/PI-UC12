@@ -1,0 +1,6 @@
+a fazer: 
+adicionar responsavel a monitor
+implementar switches e pontos
+finalizar edicao
+finalizar pesquisa
+implementar rede
