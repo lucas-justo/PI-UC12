@@ -5,6 +5,7 @@ include_once '../dao/clsConexao.php';
 
 
 if( isset( $_REQUEST['inserir'] ) ){
+	
     $servidor = new Servidor();
     $servidor->setSERVNOME( $_POST['txtNome']  );
 	$servidor->setSERVIP( $_POST['txtIP']  );
@@ -17,6 +18,7 @@ if( isset( $_REQUEST['inserir'] ) ){
 	$servidor->setSERVSENHA( $_POST['txtPass']  );
 	$servidor->setSERVSERVICOS( $_POST['txtServ']  );
 	$servidor->setSERVDESCRICAO( $_POST['txtDesc']  );
+	$servidor->setCODPC( $_POST['txtCODPC']  );
     
     ServidorDAO::inserir($servidor);
     
@@ -39,10 +41,11 @@ if( isset($_REQUEST['editar'])){
 	$servidor->setSERVSENHA( $_POST['txtPass']  );
 	$servidor->setSERVSERVICOS( $_POST['txtServ']  );
 	$servidor->setSERVDESCRICAO( $_POST['txtDesc']  );
+	$servidor->setCODPC( $_POST['txtCODPC']  );
     
     ServidorDAO::editar($servidor);
     
-  //  header("Location: ../servidores.php");
+    header("Location: ../servidores.php");
     
 }
 

@@ -1,6 +1,8 @@
 <?php
 include_once 'model/clsServidor.php';
+include_once 'model/clsComputador.php';
 include_once 'dao/clsServidorDAO.php';
+include_once 'dao/clsComputadorDAO.php';
 include_once 'dao/clsConexao.php';
 ?>
 
@@ -28,20 +30,19 @@ if( isset($_SESSION['logado']) &&
  <li  class="menu" >   <a href="index.php">        		Inicio</a></li>	
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
  <li  class="menu" >   <a href="Servidores.php">        Servidores</a></li>
- <li  class="menu" > <a href="Rede.php">			    Rede</a></li>
-<li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
+ <li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
 
 <a href="sair.php"><button class="button">Sair</button></a>
 
 	</div>
-
+	
 
 	<form action="controller/salvarServidor.php?inserir" method="POST" >
 	
 		<div class="form_item">		
         <label>IP: </label>
         <input type="text" autocomplete="off" name="txtIP" />
-		<label>Nome: </label>
+		<label>Nome do Servidor: </label>
         <input type="text" autocomplete="off" name="txtNome" />
 		<label>Localizacao: </label>
         <input type="text" autocomplete="off" name="txtLocal" />
@@ -57,11 +58,16 @@ if( isset($_SESSION['logado']) &&
         <input type="text" autocomplete="off" name="txtServ" />		
 		</div>
 		
+		
 		<div class="form_item">
+		
+		<label>ID do Computador (Host): </label>
+        <input type="number" autocomplete="off" name="txtCODPC" />
+		
 		<label>Login da Maquina: </label>
-        <input type="password" autocomplete="off" name="txtUser" />
+        <input type="text" autocomplete="off" name="txtUser" />
 		<label>Senha da Maquina: </label>
-        <input type="password" autocomplete="off" name="txtPass" />
+        <input type="text" autocomplete="off" name="txtPass" />
 		<label>Descricao: </label>
         <textarea id="descricao" name="txtDesc" > </textarea>
 		</div>		
@@ -91,12 +97,22 @@ if( isset($_SESSION['logado']) &&
 						<th>Senha</th>
 						 <th>Servicos</th>
 						  <th>Descricao</th>
+						   <th>Host/Maquina</th>
                 <th>Editar</th>
                 <th>Excluir</th>
             </tr>
             
             <?php 
                 foreach ($lista as $servidor) {
+					
+					$id = $servidor->getCODPC();
+					if( $id != NULL ) {
+					$computador = ComputadorDAO::getComputadorById( $id );
+					$pcnome = $computador->getPCNOME();
+					}else {
+						$pcnome = 'N/A';
+					}
+					
                     echo '<tr>
                         <td>'.$servidor->getID().'</td>
                         <td>'.$servidor->getSERVIP().'</td>
@@ -110,6 +126,7 @@ if( isset($_SESSION['logado']) &&
                         <td>'.$servidor->getSERVSENHA().'</td>
 						<td>'.$servidor->getSERVSERVICOS().'</td>
 						<td>'.$servidor->getSERVDESCRICAO().'</td>
+						<td>'.$pcnome.'</td>
               
                         <td> 
                             <a href="controller/salvarServidor.php?editar&idServidor='.$servidor->getID().'">

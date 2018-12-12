@@ -138,6 +138,26 @@ font-size: 16px;
 	
 	background-color: #FCF1DC;
 }
+
+
+.menu3 {
+	border-radius: 4px;
+	padding: 16px;
+	padding-left: 34px;
+	padding-right: 34px;
+	margin: 4px;
+	background-color: #e5f2d5;
+	color:#cedaed;
+	text-align: center;
+	list-style: none;
+
+}
+
+
+.menu3:hover{
+	
+	background-color: #eef7e3;
+}
 /*  */
 
 
@@ -164,6 +184,20 @@ form {
 	
 }
 
-input{ margin:4px; display:flex; margin:0 auto;}
+input{ margin:8px; margin:0 auto;}
 
+
+
+#login {
+	margin: 14px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	font-family: "Consolas";
+	color:#ba6084;
+	font-size: 18px;
+	text-align: center;
+}
+
+#centro {align-self: center; margin: auto;}
 /* */

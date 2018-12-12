@@ -13,10 +13,11 @@ class Servidor {
     private $SERVSENHA;
     private $SERVDESCRICAO;
     private $SERVSERVICOS;
+	private $CODPC;
     
     public function __construct($ID = NULL, $SERVIP = NULL, $SERVLOCALIZACAO = NULL, $SERVNOME = NULL,
             $SERVCPU = NULL, $SERVMEMORIA = NULL, $SERVDISCO = NULL, $SERVSISTEMA = NULL,
-            $SERVUSER = NULL, $SERVSENHA = NULL, $SERVDESCRICAO = NULL) {
+            $SERVUSER = NULL, $SERVSENHA = NULL, $SERVDESCRICAO = NULL , $CODPC = NULL) {
         $this->ID = $ID;
         $this->SERVIP = $SERVIP;
         $this->SERVLOCALIZACAO = $SERVLOCALIZACAO;
@@ -28,6 +29,7 @@ class Servidor {
         $this->SERVUSER = $SERVUSER;
         $this->SERVSENHA = $SERVSENHA;
         $this->SERVDESCRICAO = $SERVDESCRICAO;
+		$this->CODPC = $CODPC;
         
         
     }
@@ -79,6 +81,10 @@ class Servidor {
     function getSERVSERVICOS() {
         return $this->SERVSERVICOS;
     }
+	
+	 function getCODPC() {
+        return $this->CODPC;
+    }
 
     function setID($ID) {
         $this->ID = $ID;
@@ -128,6 +134,9 @@ class Servidor {
         $this->SERVSERVICOS = $SERVSERVICOS;
     }
 
+	function setCODPC($CODPC) {
+        $this->CODPC = $CODPC;
+    }
 
     
 }

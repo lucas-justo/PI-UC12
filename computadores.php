@@ -28,7 +28,6 @@ if( isset($_SESSION['logado']) &&
  <li  class="menu" >   <a href="index.php">        		Inicio</a></li>	
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
  <li  class="menu" >   <a href="servidores.php">        Servidores</a></li>
- <li  class="menu" > <a href="Rede.php">			    Rede</a></li>
  <li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
 
 <a href="sair.php"><button class="button">Sair</button></a>
@@ -36,8 +35,10 @@ if( isset($_SESSION['logado']) &&
 	</div>
 
 <div id="menu2">
-<li  class="menu2" style="background-color:#e5b299;">   <a href="computadores.php">Computadores</a></li> 
-<li  class="menu2" >   <a href="monitores.php">Monitores</a></li> 
+<li  class="menu3" style="background-color:#dce8ce;">   <a href="computadores.php">Computadores</a></li> 
+<li  class="menu3" >   <a href="monitores.php">Monitores</a></li> 
+<li  class="menu3" >   <a href="pontos.php">Pontos</a></li> 
+<li  class="menu3" >   <a href="switches.php">Switches</a></li>
 </div>
 
 	<form action="controller/salvarComputador.php?inserir" method="POST" >

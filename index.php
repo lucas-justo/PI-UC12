@@ -24,7 +24,6 @@
 <li class="menu">   <a href="index.php">       			 Inicio</a></li>	
 <li class="menu">   <a href="equipamentos.php">          Equipamentos</a></li> 
 <li class="menu">   <a href="servidores.php">       	 Servidores</a></li>
-<li class="menu"> <a href="rede.php">       			 Rede</a></li>
 <li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
 
 <a href="sair.php"><button class="button">Sair</button></a>
@@ -38,16 +37,16 @@
    ?>
 	<h1>Você não tem permissão para acessar o Portal, faça login para continuar!</h1>
 
- <form action="entrar.php" method="POST" >
-	<div class="form_item">		
+ <form  id="login" action="entrar.php" method="POST" >
+		
         <input type="text" name="txtLogin" required
                placeholder="Login" />
         
         <input type="password" name="txtSenha"
                placeholder="Senha" required />
         
-        <input class="button" type="submit" value="Entrar" /> 
-	</div>
+        <input id="centro" class="button" type="submit" value="Entrar" /> 
+	
 	</form>
 
     <?php

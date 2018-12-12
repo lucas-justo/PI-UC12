@@ -4,7 +4,7 @@ class ServidorDAO {
 	
 	public static function inserir($servidor) {
 		  $sql = "INSERT INTO SERVIDORES "
-                . " ( SERVIP , SERVLOCALIZACAO , SERVNOME , SERVCPU , SERVMEMORIA , SERVDISCO , SERVSISTEMA , SERVUSER , SERVSENHA , SERVDESCRICAO , SERVSERVICOS ) VALUES "
+                . " ( SERVIP , SERVLOCALIZACAO , SERVNOME , SERVCPU , SERVMEMORIA , SERVDISCO , SERVSISTEMA , SERVUSER , SERVSENHA , SERVDESCRICAO , SERVSERVICOS , CODPC ) VALUES "
                 . " ( '" . $servidor->getSERVIP()."' , "
 				. "  '" . $servidor->getSERVLOCALIZACAO()."' , "
 				. "  '" . $servidor->getSERVNOME()."' , "
@@ -15,7 +15,8 @@ class ServidorDAO {
 				. "  '" . $servidor->getSERVUSER()."' , "
 				. "  '" . $servidor->getSERVSENHA()."' , "
 				. "  '" . $servidor->getSERVDESCRICAO()."' , "
-				. "  '" . $servidor->getSERVSERVICOS()."' ); ";
+				. "  '" . $servidor->getSERVSERVICOS()."'  , "
+				. "  " . $servidor->getCODPC()." ); ";
 				
         Conexao::executar($sql);
 	}
@@ -33,6 +34,7 @@ class ServidorDAO {
 				. " SERVUSER = '".$servidor->getSERVUSER()."' "
 				. " SERVSENHA = '".$servidor->getSERVSENHA()."' "
 				. " SERVDESCRICAO = '".$servidor->getSERVDESCRICAO()."' "
+				. " CODPC = ".$servidor->getCODPC()." "
                 . " WHERE ID = ".$servidor->getID();
         Conexao::executar($sql);
     }
@@ -45,11 +47,11 @@ class ServidorDAO {
     }
 	
 	public static function getServidores(){
-        $sql = "SELECT ID, SERVIP , SERVLOCALIZACAO , SERVNOME , SERVCPU , SERVMEMORIA , SERVDISCO , SERVSISTEMA , SERVUSER , SERVSENHA , SERVDESCRICAO , SERVSERVICOS  FROM SERVIDORES ORDER BY SERVNOME";
+        $sql = "SELECT ID, SERVIP , SERVLOCALIZACAO , SERVNOME , SERVCPU , SERVMEMORIA , SERVDISCO , SERVSISTEMA , SERVUSER , SERVSENHA , SERVDESCRICAO , SERVSERVICOS , CODPC FROM SERVIDORES ORDER BY SERVNOME";
         $result = Conexao::consultar($sql);
         $lista = new ArrayObject();
         if( $result != NULL ){
-            while( list($_ID, $_SERVIP , $_SERVLOCALIZACAO , $_SERVNOME , $_SERVCPU , $_SERVMEMORIA , $_SERVDISCO , $_SERVSISTEMA , $_SERVUSER , $_SERVSENHA , $_SERVDESCRICAO , $_SERVSERVICOS ) = mysqli_fetch_row($result) ){
+            while( list($_ID, $_SERVIP , $_SERVLOCALIZACAO , $_SERVNOME , $_SERVCPU , $_SERVMEMORIA , $_SERVDISCO , $_SERVSISTEMA , $_SERVUSER , $_SERVSENHA , $_SERVDESCRICAO , $_SERVSERVICOS , $_CODPC ) = mysqli_fetch_row($result) ){
                 $servidores = new Servidor();
                 $servidores->setID($_ID);
                 $servidores->setSERVIP($_SERVIP);
@@ -63,6 +65,7 @@ class ServidorDAO {
 				$servidores->setSERVSENHA($_SERVSENHA);
 				$servidores->setSERVDESCRICAO($_SERVDESCRICAO);
 				$servidores->setSERVSERVICOS($_SERVSERVICOS);
+				$servidores->setCODPC($_CODPC);
                 $lista->append($servidores);
             }
         }
@@ -70,14 +73,14 @@ class ServidorDAO {
     }
 	
 	 public static function getServidorById( $id ){
-        $sql = " SELECT ID , SERVIP , SERVLOCALIZACAO , SERVNOME , SERVCPU , SERVMEMORIA , SERVDISCO , SERVSISTEMA , SERVUSER , SERVSENHA , SERVDESCRICAO , SERVSERVICOS "
+        $sql = " SELECT ID , SERVIP , SERVLOCALIZACAO , SERVNOME , SERVCPU , SERVMEMORIA , SERVDISCO , SERVSISTEMA , SERVUSER , SERVSENHA , SERVDESCRICAO , SERVSERVICOS , CODPC "
              . " FROM SERVIDORES "
              . " WHERE ID = ".$id
              . " ORDER BY SERVNOME ";
         
         $result = Conexao::consultar($sql);
       
-        list( $_ID, $_SERVIP , $_SERVLOCALIZACAO , $_SERVNOME , $_SERVCPU , $_SERVMEMORIA , $_SERVDISCO , $_SERVSISTEMA , $_SERVUSER , $_SERVSENHA , $_SERVDESCRICAO , $_SERVSERVICOS ) = mysqli_fetch_row($result);
+        list( $_ID, $_SERVIP , $_SERVLOCALIZACAO , $_SERVNOME , $_SERVCPU , $_SERVMEMORIA , $_SERVDISCO , $_SERVSISTEMA , $_SERVUSER , $_SERVSENHA , $_SERVDESCRICAO , $_SERVSERVICOS , $_CODPC ) = mysqli_fetch_row($result);
                 $servidor = new Servidor();
                 $servidor->setID($_ID);
                 $servidor->setSERVIP($_SERVIP);
@@ -91,6 +94,7 @@ class ServidorDAO {
 				$servidor->setSERVSENHA($_SERVSENHA);
 				$servidor->setSERVDESCRICAO($_SERVDESCRICAO);
 				$servidor->setSERVSERVICOS($_SERVSERVICOS);
+				$servidor->setCODPC($_CODPC);
             
         return $servidor;
     }
