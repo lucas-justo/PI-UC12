@@ -23,19 +23,19 @@ $action = "inserir";
 
 if( isset($_REQUEST['editar'])){
     $idServidor = $_REQUEST['idServidor'];
-    $servidorEditar = ServidorDAO::getServidorById( $idServidor );
-	$ip = $servidorEditar->getSERVIP();
-    $nome = $servidorEditar->getSERVNOME();
-    $local = $servidorEditar->getSERVLOCALIZACAO();
-	$cpu = $servidorEditar->getSERVCPU();
-	$memoria = $servidorEditar->getSERVMEMORIA();
-	$disco = $servidorEditar->getSERVDISCO();
-	$sistema = $servidorEditar->getSERVSISTEMA();
-	$servicos = $servidorEditar->getSERVSERVICOS();
-	$login = $servidorEditar->getSERVUSER();
-	$senha = $servidorEditar->getSERVSENHA();
-	$descricao = $servidorEditar->getSERVDESCRICAO();
-	$cod = $servidorEditar->getCODPC();
+    $computadorEditar = ServidorDAO::getServidorById( $idServidor );
+	$ip = $computadorEditar->getSERVIP();
+    $nome = $computadorEditar->getSERVNOME();
+    $local = $computadorEditar->getSERVLOCALIZACAO();
+	$cpu = $computadorEditar->getSERVCPU();
+	$memoria = $computadorEditar->getSERVMEMORIA();
+	$disco = $computadorEditar->getSERVDISCO();
+	$sistema = $computadorEditar->getSERVSISTEMA();
+	$servicos = $computadorEditar->getSERVSERVICOS();
+	$login = $computadorEditar->getSERVUSER();
+	$senha = $computadorEditar->getSERVSENHA();
+	$descricao = $computadorEditar->getSERVDESCRICAO();
+	$cod = $computadorEditar->getCODPC();
     $action = "editar&idServidor=".$idServidor;
     
 }
@@ -76,35 +76,87 @@ if( isset($_SESSION['logado']) &&
 	<form action="controller/salvarServidor.php?<?php echo $action; ?>" method="POST" >
 	
 		<div class="form_item">		
-        <label>IP: </label>
-        <input type="text" autocomplete="off" name="txtIP" value="<?php echo $ip; ?>" />
-		<label>Nome do Servidor: </label>
+        
+		<label>Nome do Computador/Servidor : </label>
 		<input type="text" autocomplete="off" name="txtNome" value="<?php echo $nome; ?>" />
-		<label>Localizacao: </label>
-        <input type="text" autocomplete="off" name="txtLocal" value="<?php echo $local; ?>" />
-		<label>Numero de CPUs: </label>
+		<label>Numero de CPUs : </label>
         <input type="number" autocomplete="off" name="txtCPU" value="<?php echo $cpu; ?>"  />
-		<label>Memoria: </label>
+		<label>Memoria : </label>
         <input type="text" autocomplete="off" name="txtMemoria" value="<?php echo $memoria; ?>" />
-		<label>Tamanho do HD: </label>
+		<label>Tamanho do HD : </label>
         <input type="text" autocomplete="off" name="txtDisco" value="<?php echo $disco; ?>" />
-		<label>Sistema: </label>
+		<label>Sistema Operacional : </label>
         <input type="text" autocomplete="off" name="txtSistema" value="<?php echo $sistema; ?>" />
-		<label>Servicos: </label>
-        <input type="text" autocomplete="off" name="txtServ" value="<?php echo $servicos; ?>" />		
 		</div>
 		
 		
 		<div class="form_item">
 		
-		<label>ID do Computador (Host): </label>
-        <input type="number" autocomplete="off" name="txtCODPC" />
+		<label>Maquina Fisica : </label>
+        <input type="checkbox" value="0" name="txtIDPC" />
 		
-		<label>Login da Maquina: </label>
-        <input type="text" autocomplete="off" name="txtUser" value="<?php echo $login; ?>"/>
-		<label>Senha da Maquina: </label>
-        <input type="text" autocomplete="off" name="txtPass" value="<?php echo $senha; ?>"/>
-		<label>Descricao: </label>
+		<label>Maquina Virtual : </label>
+        <input type="checkbox" value="1" name="txtIDPCVT" />
+		
+					
+			
+			<label>Host : </label>
+			<select name="stHost" >			
+			<?php			
+			$select = ComputadorDAO::getComputadores();			
+			if ( $select->count()==0){
+				echo '<option value="" selected disabled hidden> Nenhum host foi encontrado </option>'
+				)else {
+				
+				echo '<option value="" selected disabled hidden> Selecione... </option>';
+				
+				foreach ( $select as $computador) {
+				echo '<option value='.$computador->getID().'>'.$computador->getNome().'</option>';
+				}
+			?>			
+			</select>
+			
+			
+			<label>Localizacao : </label>
+			<select name="stLocal" >			
+			<?php			
+			$select = LocalizacaoDAO::getLocalizacoes();			
+			if ( $select->count()==0){
+				echo '<option value="" selected disabled hidden> Nenhuma localizacao foi encontrada </option>'
+				)else {
+				
+				echo '<option value="" selected disabled hidden> Selecione... </option>';
+				
+				foreach ( $select as $localizacao) {
+				echo '<option value='.$localizacao->getID().'>'.$localizacao->getNome().'</option>';
+				}
+			?>			
+			</select>
+			
+		<label>Servicos ( DNS , Proxy , Etc ) : </label>
+        <input type="text" autocomplete="off" name="txtServ" value="<?php echo $servicos; ?>" />	
+		<label>IP (Se possuir IP fixo) : </label>
+        <input type="text" autocomplete="off" name="txtIP" value="<?php echo $ip; ?>" />
+		
+		<label>Responsavel : </label>
+			<select name="stLocal" >			
+			<?php			
+			$select = ResponsavelDAO::getResponsaveis();			
+			if ( $select->count()==0){
+				echo '<option value="" selected disabled hidden> Nenhum Responsavel foi encontrado </option>'
+				)else {
+				
+				echo '<option value="" selected disabled hidden> Selecione... </option>';
+				
+				foreach ( $select as $responsavel) {
+				echo '<option value='.$responsavel->getID().'>'.$responsavel->getNome().'</option>';
+				}
+			?>			
+			</select>
+		
+
+		
+		<label>Descricao : </label>
         <textarea id="descricao" name="txtDesc"><?php echo $descricao;?></textarea>
 		</div>		
         <input class="button" type="submit" value="Salvar" />
@@ -112,7 +164,7 @@ if( isset($_SESSION['logado']) &&
 		
 		<?php
             
-            $lista = ServidorDAO::getServidores();
+            $lista = ComputadorDAO::getComputadores();
             
             if ( $lista->count()==0){
                 echo '<h2><b>Nenhum servidor cadastrado</b></h2>';
@@ -129,8 +181,8 @@ if( isset($_SESSION['logado']) &&
 				     <th>CPU</th>				 
 				      <th>Memoria</th>	
 						<th>Disco</th>
-					   <th>Usuario</th>
-						<th>Senha</th>
+					   <th>Responsavel</th>
+						<th>Virtual</th>
 						 <th>Servicos</th>
 						  <th>Descricao</th>
 						   <th>Host/Maquina</th>
@@ -139,9 +191,9 @@ if( isset($_SESSION['logado']) &&
             </tr>
             
             <?php 
-                foreach ($lista as $servidor) {
+                foreach ($lista as $computador) {
 					
-					$id = $servidor->getCODPC();
+					$id = $computador->getCODPC();
 					if( $id != NULL ) {
 					$computador = ComputadorDAO::getComputadorById( $id );
 					$pcnome = $computador->getPCNOME();
@@ -150,26 +202,26 @@ if( isset($_SESSION['logado']) &&
 					}
 					
                     echo '<tr>
-                        <td>'.$servidor->getID().'</td>
-                        <td>'.$servidor->getSERVIP().'</td>
-						<td>'.$servidor->getSERVLOCALIZACAO().'</td>
-						<td>'.$servidor->getSERVSISTEMA().'</td>
-                        <td>'.$servidor->getSERVNOME().'</td>
-						<td>'.$servidor->getSERVCPU().'</td>
-                        <td>'.$servidor->getSERVMEMORIA().'</td>
-						<td>'.$servidor->getSERVDISCO().'</td>
-						<td>'.$servidor->getSERVUSER().'</td>
-                        <td>'.$servidor->getSERVSENHA().'</td>
-						<td>'.$servidor->getSERVSERVICOS().'</td>
-						<td>'.$servidor->getSERVDESCRICAO().'</td>
+                        <td>'.$computador->getID().'</td>
+                        <td>'.$computador->getSERVIP().'</td>
+						<td>'.$computador->getSERVLOCALIZACAO().'</td>
+						<td>'.$computador->getSERVSISTEMA().'</td>
+                        <td>'.$computador->getSERVNOME().'</td>
+						<td>'.$computador->getSERVCPU().'</td>
+                        <td>'.$computador->getSERVMEMORIA().'</td>
+						<td>'.$computador->getSERVDISCO().'</td>
+						<td>'.$computador->getSERVUSER().'</td>
+                        <td>'.$computador->getSERVSENHA().'</td>
+						<td>'.$computador->getSERVSERVICOS().'</td>
+						<td>'.$computador->getSERVDESCRICAO().'</td>
 						<td>'.$pcnome.'</td>
               
                         <td> 
-                            <a href="?editar&idServidor='.$servidor->getId().'">
+                            <a href="?editar&idServidor='.$computador->getId().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarServidor.php?excluir&idServidor='.$servidor->getID().'">
+                            <a href="controller/salvarServidor.php?excluir&idServidor='.$computador->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            

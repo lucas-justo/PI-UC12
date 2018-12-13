@@ -1,6 +1,7 @@
-a fazer: 
-adicionar responsavel a monitor
+a fazer (master): 
 implementar switches e pontos
 finalizar edicao
 finalizar pesquisa
-implementar rede
+
+a fazer (portalweb):
+tudo
