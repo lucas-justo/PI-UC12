@@ -20,14 +20,14 @@ class MonitorDAO {
 	
 	public static function editar( $monitor ){
         $sql =    "UPDATE MONITORES SET "
-                . " MTNOME = '".$monitor->getMTNOME()."' "
-				. " MTCARGO = '".$monitor->getMTCARGO()."' "
-				. " MTRESPONSAVEL = '".$monitor->getMTRESPONSAVEL()."' "
-				. " MTSETOR = '".$monitor->getMTSETOR()."' "
-				. " MTNOMEANTIGO = '".$monitor->getMTNOMEANTIGO()."' "
-				. " MTMODELO = '".$monitor->getMTMODELO()."' "
-				. " MTMODELOANTIGO = '".$monitor->getMTMODELOANTIGO()."' "
-				. " MTPATRIMONIO = '".$monitor->getMTPATRIMONIO()."' "
+                . " MTNOME = '".$monitor->getMTNOME()."' , "
+				. " MTCARGO = '".$monitor->getMTCARGO()."' , "
+				. " MTRESPONSAVEL = '".$monitor->getMTRESPONSAVEL()."' , "
+				. " MTSETOR = '".$monitor->getMTSETOR()."' , "
+				. " MTNOMEANTIGO = '".$monitor->getMTNOMEANTIGO()."' , "
+				. " MTMODELO = '".$monitor->getMTMODELO()."' , "
+				. " MTMODELOANTIGO = '".$monitor->getMTMODELOANTIGO()."' , "
+				. " MTPATRIMONIO = '".$monitor->getMTPATRIMONIO()."' , "
 				. " MTDESCRICAO = '".$monitor->getMTDESCRICAO()."' "
                 . " WHERE ID = ".$monitor->getID();
         Conexao::executar($sql);
@@ -35,7 +35,7 @@ class MonitorDAO {
 	
 	public static function excluir( $idMonitor ){
         $sql =    "DELETE FROM MONITORES "
-                . " WHERE ID = ".$idmonitor;
+                . " WHERE ID = ".$idMonitor;
         Conexao::executar($sql);
         
     }
@@ -63,14 +63,17 @@ class MonitorDAO {
         return $lista;
     }
 	
-	 public static function getMonitorById( $id ){
+	 public static function getMonitorById( $idMonitor ){
         $sql = " SELECT ID , MTCARGO , MTRESPONSAVEL , MTSETOR , MTNOME , MTNOMEANTIGO , MTMODELO , MTMODELOANTIGO , MTPATRIMONIO , MTDESCRICAO  "
              . " FROM MONITORES "
-             . " WHERE ID = ".$id
-             . " ORDER BY MTNOME ";
+             . " WHERE ID = ".$idMonitor;
         
         $result = Conexao::consultar($sql);
-      
+     
+		$monitor = NULL;  
+	   
+	   if( $result != NULL ){
+	   
         list( $_ID, $_MTCARGO , $_MTSETOR , $_MTRESPONSAVEL , $_MTNOME , $_MTNOMEANTIGO , $_MTMODELO , $_MTMODELOANTIGO , $_MTPATRIMONIO , $_MTDESCRICAO ) = mysqli_fetch_row($result);
                 $monitor = new Monitor();
                 $monitor->setID($_ID);
@@ -83,7 +86,7 @@ class MonitorDAO {
 				$monitor->setMTMODELOANTIGO($_MTMODELOANTIGO);
 				$monitor->setMTPATRIMONIO($_MTPATRIMONIO);
 				$monitor->setMTDESCRICAO($_MTDESCRICAO);
-            
+	   }
         return $monitor;
     }
 	

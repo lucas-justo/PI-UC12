@@ -23,9 +23,10 @@ if( isset( $_REQUEST['inserir'] ) ){
 
 if( isset($_REQUEST['editar'])){
     
-    $id = $_REQUEST['idServidor'];
-    $monitor = MonitorDAO::getMonitorById($id);
-
+   // $id = $_REQUEST['idServidor'];
+   // $monitor = MonitorDAO::getMonitorById($id);
+	$monitor = new Monitor();
+	$monitor->setID( $_REQUEST['idMonitor']  );
     $monitor->setMTNOME( $_POST['txtNome']  );
 	$monitor->setMTNOMEANTIGO( $_POST['txtNomeAntigo']  );
 	$monitor->setMTSETOR( $_POST['txtSetor']  );
@@ -35,7 +36,6 @@ if( isset($_REQUEST['editar'])){
 	$monitor->setMTCARGO( $_POST['txtCargo']  );
 	$monitor->setMTRESPONSAVEL( $_POST['txtResponsavel']  );
 	$monitor->setMTDESCRICAO( $_POST['txtDesc']  );
-    
     MonitorDAO::editar($monitor);
     
     header("Location: ../monitores.php");

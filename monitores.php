@@ -2,6 +2,35 @@
 include_once 'model/clsMonitor.php';
 include_once 'dao/clsMonitorDAO.php';
 include_once 'dao/clsConexao.php';
+
+$nome = "";
+$responsavel= "";
+$setor = "";
+$modelo = "";
+$patrimonio = "";
+$cargo = "";
+$nomeantigo = "";
+$modeloantigo = "";
+$descricao = "";
+
+$idMonitor = 0;
+$action = "inserir";
+
+if( isset($_REQUEST['editar'])){
+    $idMonitor = $_REQUEST['idMonitor'];
+    $monitorEditar = MonitorDAO::getMonitorById( $idMonitor );
+    $nome = $monitorEditar->getMTNOME();
+    $responsavel = $monitorEditar->getMTRESPONSAVEL();
+	$setor = $monitorEditar->getMTSETOR();
+	$modelo = $monitorEditar->getMTMODELO();
+	$patrimonio = $monitorEditar->getMTPATRIMONIO();
+	$cargo = $monitorEditar->getMTCARGO();
+	$nomeantigo = $monitorEditar->getMTNOMEANTIGO();
+	$modeloantigo = $monitorEditar->getMTMODELOANTIGO();
+	$descricao = $monitorEditar->getMTDESCRICAO();
+    $action = "editar&idMonitor=".$idMonitor;
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -28,7 +57,6 @@ if( isset($_SESSION['logado']) &&
  <li  class="menu" >   <a href="index.php">        		Inicio</a></li>	
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
  <li  class="menu" >   <a href="servidores.php">        Servidores</a></li>
- <li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
 
 <a href="sair.php"><button class="button">Sair</button></a>
 
@@ -37,34 +65,32 @@ if( isset($_SESSION['logado']) &&
 <div id="menu2">
 <li  class="menu3">   <a href="computadores.php">Computadores</a></li> 
 <li  class="menu3" style="background-color:#dce8ce;" >   <a href="monitores.php">Monitores</a></li> 
-<li  class="menu3" >   <a href="pontos.php">Pontos</a></li> 
-<li  class="menu3" >   <a href="switches.php">Switches</a></li>
 </div>
 
-	<form action="controller/salvarMonitor.php?inserir" method="POST" >
+	<form action="controller/salvarMonitor.php?<?php echo $action; ?>" method="POST" >
 	
 		<div class="form_item">		
 		<label>Nome: </label>
-        <input type="text" autocomplete="off" name="txtNome" />
+        <input type="text" autocomplete="off" name="txtNome"  value="<?php echo $nome; ?>" />
 		<label>Setor: </label>
-        <input type="text" autocomplete="off" name="txtSetor" />
+        <input type="text" autocomplete="off" name="txtSetor"  value="<?php echo $setor; ?>"  />
 		<label>Modelo: </label>
-        <input type="text" autocomplete="off" name="txtModelo" />
+        <input type="text" autocomplete="off" name="txtModelo"  value="<?php echo $modelo; ?>" />
 		<label>Patrimonio: </label>
-        <input type="text" autocomplete="off" name="txtPatrimonio" />
+        <input type="text" autocomplete="off" name="txtPatrimonio"  value="<?php echo $patrimonio; ?>" />
 		<label>Nome do Responsavel: </label>
-        <input type="text" autocomplete="off" name="txtResponsavel" />
+        <input type="text" autocomplete="off" name="txtResponsavel"  value="<?php echo $responsavel; ?>" />
 		<label>Cargo do Responsavel: </label>
-        <input type="text" autocomplete="off" name="txtCargo" />	
+        <input type="text" autocomplete="off" name="txtCargo"  value="<?php echo $cargo; ?>" />	
 		</div>
 		
 		<div class="form_item">
 		<label>Nome Antigo: </label>
-        <input autocomplete="off" name="txtNomeAntigo" />
+        <input autocomplete="off" name="txtNomeAntigo"  value="<?php echo $nomeantigo; ?>" />
 		<label>Modelo Antigo: </label>
-        <input  autocomplete="off" name="txtModeloAntigo" />
+        <input  autocomplete="off" name="txtModeloAntigo"  value="<?php echo $modeloantigo; ?>" />
 		<label>Descricao: </label>
-        <textarea id="descricao" name="txtDesc" > </textarea>
+        <textarea id="descricao" name="txtDesc"  value="<?php echo $descricao; ?>" > </textarea>
 		</div>		
         <input class="button" type="submit" value="Salvar" />
 		</form>
@@ -109,7 +135,7 @@ if( isset($_SESSION['logado']) &&
 						<td>'.$monitor->getMTDESCRICAO().'</td>
                 
                         <td> 
-                            <a href="controller/salvarMonitor.php?editar&idMonitor='.$monitor->getID().'">
+                            <a href="?editar&idMonitor='.$monitor->getId().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>

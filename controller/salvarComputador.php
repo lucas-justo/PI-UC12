@@ -21,11 +21,13 @@ if( isset( $_REQUEST['inserir'] ) ){
     header("Location: ../computadores.php");
 }
 
+
 if( isset($_REQUEST['editar'])){
     
-    $id = $_REQUEST['idServidor'];
-    $computador = ComputadorDAO::getComputadorById($id);
-
+    //$id = $_REQUEST['idServidor'];
+    //$computador = ComputadorDAO::getComputadorById($id);
+	$computador = new Computador();
+	$computador->setID( $_REQUEST['idComputador'] );
     $computador->setPCNOME( $_POST['txtNome']  );
 	$computador->setPCNOMEANTIGO( $_POST['txtNomeAntigo']  );
 	$computador->setPCSETOR( $_POST['txtSetor']  );

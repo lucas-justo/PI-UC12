@@ -23,17 +23,17 @@ class ServidorDAO {
 	
 	public static function editar( $servidor ){
         $sql =    "UPDATE SERVIDORES SET "
-                . " SERVNOME = '".$servidor->getSERVNOME()."' "
-				. " SERVIP = '".$servidor->getSERVIP()."' "
-				. " SERVLOCALIZACAO = '".$servidor->getSERVLOCALIZACAO()."' "
-				. " SERVCPU = ".$servidor->getSERVCPU()." "
-				. " SERVMEMORIA = '".$servidor->getSERVMEMORIA()."' "
-				. " SERVDISCO = '".$servidor->getSERVDISCO()."' "
-				. " SERVSISTEMA = '".$servidor->getSERVSISTEMA()."' "
-				. " SERVSERVICOS = '".$servidor->getSERVSERVICOS()."' "
-				. " SERVUSER = '".$servidor->getSERVUSER()."' "
-				. " SERVSENHA = '".$servidor->getSERVSENHA()."' "
-				. " SERVDESCRICAO = '".$servidor->getSERVDESCRICAO()."' "
+                . " SERVNOME = '".$servidor->getSERVNOME()."' , "
+				. " SERVIP = '".$servidor->getSERVIP()."' , "
+				. " SERVLOCALIZACAO = '".$servidor->getSERVLOCALIZACAO()."' , "
+				. " SERVCPU = ".$servidor->getSERVCPU()." , "
+				. " SERVMEMORIA = '".$servidor->getSERVMEMORIA()."' , "
+				. " SERVDISCO = '".$servidor->getSERVDISCO()."' , "
+				. " SERVSISTEMA = '".$servidor->getSERVSISTEMA()."' , "
+				. " SERVSERVICOS = '".$servidor->getSERVSERVICOS()."' , "
+				. " SERVUSER = '".$servidor->getSERVUSER()."' , "
+				. " SERVSENHA = '".$servidor->getSERVSENHA()."' , "
+				. " SERVDESCRICAO = '".$servidor->getSERVDESCRICAO()."' , "
 				. " CODPC = ".$servidor->getCODPC()." "
                 . " WHERE ID = ".$servidor->getID();
         Conexao::executar($sql);
