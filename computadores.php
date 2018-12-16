@@ -24,6 +24,8 @@ if( isset($_SESSION['logado']) &&
                   $_SESSION['logado'] == TRUE ) {
 ?>
 
+					<!-- Menus -->
+
 	<div id="header">
  <li  class="menu" >   <a href="index.php">        		Inicio</a></li>	
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
@@ -41,31 +43,140 @@ if( isset($_SESSION['logado']) &&
 <li  class="menu3" >   <a href="switches.php">Switches</a></li>
 </div>
 
+					<!-- Formularios -->
+
 	<form action="controller/salvarComputador.php?inserir" method="POST" >
 	
 		<div class="form_item">		
-		<label>Nome: </label>
-        <input type="text" autocomplete="off" name="txtNome" />
-		<label>Setor: </label>
-        <input type="text" autocomplete="off" name="txtSetor" />
-		<label>Modelo: </label>
-        <input type="text" autocomplete="off" name="txtModelo" />
-		<label>Patrimonio: </label>
-        <input type="text" autocomplete="off" name="txtPatrimonio" />
-		<label>Nome do Responsavel: </label>
-        <input type="text" autocomplete="off" name="txtCargo" />	
+			<label>Nome da Maquina : </label>
+			<input type="text" autocomplete="off" name="txtNome" />
+
+			<label>Numero de CPUs : </label>
+			<input type="text" autocomplete="off" name="txtCPU" />
+			
+			<label>Tamanho da Memoria : </label>
+			<input type="text" autocomplete="off" name="txtMemoria" />
+			
+			<label>Tamanho do Disco : </label>
+			<input type="text" autocomplete="off" name="txtDisco" />
+			
+			<label>Patrimonio : </label>
+			<input type="text" autocomplete="off" name="txtPatrimonio" />
+			
+			<label>Sistema Operacional : </label>
+			<input type="text" autocomplete="off" name="txtSistema" />
+			
+			<label>IP Fixo (Se possuir) : </label>
+			<input type="text" autocomplete="off" name="txtIP" />
+			
+			<label>Servicos : </label>
+			<input type="text" autocomplete="off" name="txtServicos" />
+		
 		</div>
 		
 		<div class="form_item">
-		<label>Nome Antigo: </label>
-        <input autocomplete="off" name="txtNomeAntigo" />
-		<label>Modelo Antigo: </label>
-        <input  autocomplete="off" name="txtModeloAntigo" />
-		<label>Descricao: </label>
-        <textarea id="descricao" name="txtDesc" > </textarea>
-		</div>		
-        <input class="button" type="submit" value="Salvar" />
-		</form>
+		
+			<label>Modelo : </label>
+			<select name="stModelo" >			
+				<?php /*
+				$select = ModeloDAO::getModelos();			
+				if ( $select->count()==0){
+					echo '<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>';
+				}else {
+					
+					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $modelo) {
+					echo '<option value='.$modelo->getID().'>'.$modelo->getNome().'</option>';
+					}
+				}*/
+				?>			
+			</select>
+			
+			<label>Responsavel : </label>
+			<select name="stResp" >			
+			<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>
+				<?php	/*
+				$select = ModeloDAO::getModelos();			
+				if ( $select->count()==0){
+					echo '<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>';
+				}else {
+					
+					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $modelo) {
+					echo '<option value='.$modelo->getID().'>'.$modelo->getNome().'</option>';
+					}
+				}*/
+				?>			
+			</select>
+
+			<label>Maquina Virtual : </label>
+			<input type="checkbox" value="Sim" name="txtPC" />
+			
+			<label>Servidor : </label>
+			<input type="checkbox" value="Sim" name="txtSV" />
+			
+			<label>Host : </label>
+			<select name="stPC" >	
+			<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>			
+				<?php	/*		
+				$select = ComputadorDAO::getComputadores();					
+				if ( $select->count()==0){
+					echo '<option value="" selected disabled hidden> Nenhum host foi encontrado </option>';
+				}else {
+					
+					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $computador) {
+					echo '<option value='.$computador->getID().'>'.$computador->getNome().'</option>';
+					}
+				}*/
+				?>			
+			</select>
+			
+			<label>Descricao: </label>
+			<textarea id="descricao" name="txtDesc" > </textarea>
+			</div>		
+			<input class="button" type="submit" value="Salvar" />
+	</form>
+	
+	<!-- Form de Responsaveis -->
+	<form action="controller/salvarResponsavel.php?inserir" method="POST" >	
+		<div class="form_item">		
+		<label>Nome : </label>
+		<input type="checkbox" value="Sim" name="txtRPNOME" />		
+		<label>Setor : </label>
+			<select name="stSetor" >	
+			<option value="" selected disabled hidden> Nenhum Setor foi encontrado </option>			
+				<?php	/*		
+				$select = ComputadorDAO::getComputadores();					
+				if ( $select->count()==0){
+					echo '<option value="" selected disabled hidden> Nenhum host foi encontrado </option>';
+				}else {
+					
+					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $computador) {
+					echo '<option value='.$computador->getID().'>'.$computador->getNome().'</option>';
+					}
+				}*/
+				?>			
+		</select>
+		<input class="button" type="submit" value="Salvar" />		
+		</div>
+	</form>	
+	
+		<!-- Form de Modelos -->
+	<form action="controller/salvarModelos.php?inserir" method="POST" >	
+		<div class="form_item">		
+		<label>Nome do Modelo : </label>
+		<input type="checkbox" value="Sim" name="txtMDNOME" />		
+		<input class="button" type="submit" value="Salvar" />		
+		</div>
+	</form>	
+	
+					<!-- Tabelas -->
 		
 		<?php
             
@@ -120,7 +231,9 @@ if( isset($_SESSION['logado']) &&
             ?>			
 	
 <?php
-        }else{
+        }else{			
+		//Caso o usuario caso nao esteja logado
+		
 		 header("Location: index.php");
 ?>
 	

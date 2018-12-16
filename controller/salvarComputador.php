@@ -7,13 +7,16 @@ include_once '../dao/clsConexao.php';
 if( isset( $_REQUEST['inserir'] ) ){
     $computador = new Computador();
     $computador->setPCNOME( $_POST['txtNome']  );
-	$computador->setPCNOMEANTIGO( $_POST['txtNomeAntigo']  );
-	$computador->setPCSETOR( $_POST['txtSetor']  );
-	$computador->setPCMODELO( $_POST['txtModelo']  );
-	$computador->setPCMODELOANTIGO( $_POST['txtModeloAntigo']  );
+	$computador->setPCCPU( $_POST['txtCPU']  );
+	$computador->setPCMEMORIA( $_POST['txtMemoria']  );
+	$computador->setPCMODELO( $_POST['stModelo']  );
+	$computador->setPCSISOP( $_POST['txtSistema']  );
 	$computador->setPCPATRIMONIO( $_POST['txtPatrimonio']  );
-	$computador->setPCCARGO( $_POST['txtCargo']  );
-	$computador->setPCRESPONSAVEL( $_POST['txtResponsavel']  );
+	$computador->setPCIP( $_POST['txtIP']  );
+	$computador->setIDRP( $_POST['stResp']  );
+	$computador->setIDPC( $_POST['stPC']  );
+	$computador->setPCVIRTUAL( $_POST['stPC']  );
+	$computador->setPCSERVIDOR( $_POST['txtSV']  );
 	$computador->setPCDESCRICAO( $_POST['txtDesc']  );
     
     ComputadorDAO::inserir($computador);
@@ -26,14 +29,18 @@ if( isset($_REQUEST['editar'])){
     $id = $_REQUEST['idServidor'];
     $computador = ComputadorDAO::getComputadorById($id);
 
+    $computador = new Computador();
     $computador->setPCNOME( $_POST['txtNome']  );
-	$computador->setPCNOMEANTIGO( $_POST['txtNomeAntigo']  );
-	$computador->setPCSETOR( $_POST['txtSetor']  );
-	$computador->setPCMODELO( $_POST['txtModelo']  );
-	$computador->setPCMODELOANTIGO( $_POST['txtModeloAntigo']  );
+	$computador->setPCCPU( $_POST['txtCPU']  );
+	$computador->setPCMEMORIA( $_POST['txtMemoria']  );
+	$computador->setPCMODELO( $_POST['stModelo']  );
+	$computador->setPCSISOP( $_POST['txtSistema']  );
 	$computador->setPCPATRIMONIO( $_POST['txtPatrimonio']  );
-	$computador->setPCCARGO( $_POST['txtCargo']  );
-	$computador->setPCRESPONSAVEL( $_POST['txtResponsavel']  );
+	$computador->setPCIP( $_POST['txtIP']  );
+	$computador->setIDRP( $_POST['stResp']  );
+	$computador->setIDPC( $_POST['stPC']  );
+	$computador->setPCVIRTUAL( $_POST['stPC']  );
+	$computador->setPCSERVIDOR( $_POST['txtSV']  );
 	$computador->setPCDESCRICAO( $_POST['txtDesc']  );
     
     ComputadorDAO::editar($computador);

@@ -2,51 +2,78 @@
 
 class Computador {
     private $ID;
-    private $PCSETOR;
-    private $PCCARGO;
-	private $PCRESPONSAVEL;
-    private $PCNOME;
-    private $PCNOMEANTIGO;
-    private $PCMODELO;
-    private $PCMODELOANTIGO;
-    private $PCPATRIMONIO;
-    private $PCDESCRICAO;
+	private $PCNOME;
+	private $PCMODELO;
+	private $PCPATRIMONIO;
+	private $PCDESCRICAO;
+	private $PCSISOP;
+	private $PCCPU;
+    private $PCLOCALIZACAO;
+	private $PCVIRTUAL;
+	private $PCSERVIDOR;
+	private $PCIP;	
+    private $PCSERVICOS;
+	private $IDPC;
+	private $IDRP;
     
-    public function __construct( $ID = NULL, $PCSETOR = NULL, $PCCARGO = NULL, $PCRESPONSAVEL = NULL ,
-            $PCNOME = NULL, $PCNOMEANTIGO = NULL, $PCMODELO = NULL, $PCMODELOANTIGO = NULL,
-            $PCPATRIMONIO = NULL, $PCDESCRICAO = NULL ){
+    
+    
+    public function __construct( $ID = NULL, $PCLOCALIZACAO = NULL, $PCMEMORIA = NULL, $IDRP = NULL ,
+            $PCNOME = NULL, $PCCPU = NULL, $PCMODELO = NULL, $PCSISOP = NULL,
+            $PCPATRIMONIO = NULL, $PCDESCRICAO = NULL , $PCVIRTUAL = NULL , $PCSERVICOS = NULL , $IDPC = NULL , $PCIP = NULL , $PCSERVIDOR = NULL){
         
     }
+	
     function getID() {
         return $this->ID;
     }
-
-    function getPCSETOR() {
-        return $this->PCSETOR;
-    }
-
-    function getPCCARGO() {
-        return $this->PCCARGO;
+	
+	function getPCLOCALIZACAO() {
+        return $this->PCLOCALIZACAO;
     }
 	
-	function getPCRESPONSAVEL() {
-        return $this->PCRESPONSAVEL;
+	function getPCSERVIDOR() {
+        return $this->PCSERVIDOR;
+    }
+
+    function getPCVIRTUAL() {
+        return $this->PCVIRTUAL;
+    }
+	
+	  function getPCSERVICOS() {
+        return $this->PCSERVICOS;
+    }
+	
+	  function getIDPC() {
+        return $this->IDPC;
+    }
+	
+	  function getPCIP() {
+        return $this->PCIP;
+    }
+
+    function getPCMEMORIA() {
+        return $this->PCMEMORIA;
+    }
+	
+	function getIDRP() {
+        return $this->IDRP;
     }
 
     function getPCNOME() {
         return $this->PCNOME;
     }
 
-    function getPCNOMEANTIGO() {
-        return $this->PCNOMEANTIGO;
+    function getPCCPU() {
+        return $this->PCCPU;
     }
 
     function getPCMODELO() {
         return $this->PCMODELO;
     }
 
-    function getPCMODELOANTIGO() {
-        return $this->PCMODELOANTIGO;
+    function getPCSISOP() {
+        return $this->PCSISOP;
     }
 
     function getPCPATRIMONIO() {
@@ -60,33 +87,53 @@ class Computador {
     function setID($ID) {
         $this->ID = $ID;
     }
-
-    function setPCSETOR($PCSETOR) {
-        $this->PCSETOR = $PCSETOR;
-    }
-
-    function setPCCARGO($PCCARGO) {
-        $this->PCCARGO = $PCCARGO;
+	
+	function setPCVIRTUAL($PCVIRTUAL) {
+        return $this->$PCVIRTUAL;
     }
 	
-	function setPCRESPONSAVEL($PCRESPONSAVEL) {
-        $this->PCRESPONSAVEL = $PCRESPONSAVEL;
+	  function setPCSERVICOS($PCSERVICOS) {
+        return $this->$PCSERVICOS;
+    }
+	
+	  function setIDPC($IDPC) {
+        return $this->$IDPC;
+    }
+	
+	  function setPCIP($PCIP) {
+        return $this->$PCIP;
+    }
+
+    function setPCLOCALIZACAO($PCLOCALIZACAO) {
+        $this->PCLOCALIZACAO = $PCLOCALIZACAO;
+    }
+
+    function setPCMEMORIA($PCMEMORIA) {
+        $this->PCMEMORIA = $PCMEMORIA;
+    }
+	
+	function setIDRP($IDRP) {
+        $this->IDRP = $IDRP;
     }
 
     function setPCNOME($PCNOME) {
         $this->PCNOME = $PCNOME;
     }
 
-    function setPCNOMEANTIGO($PCNOMEANTIGO) {
-        $this->PCNOMEANTIGO = $PCNOMEANTIGO;
+    function setPCCPU($PCCPU) {
+        $this->PCCPU = $PCCPU;
+    }
+	
+	function setPCSERVIDOR($PCSERVIDOR) {
+        $this->PCCPU = $PCSERVIDOR;
     }
 
     function setPCMODELO($PCMODELO) {
         $this->PCMODELO = $PCMODELO;
     }
 
-    function setPCMODELOANTIGO($PCMODELOANTIGO) {
-        $this->PCMODELOANTIGO = $PCMODELOANTIGO;
+    function setPCSISOP($PCSISOP) {
+        $this->PCSISOP = $PCSISOP;
     }
 
     function setPCPATRIMONIO($PCPATRIMONIO) {
