@@ -1,6 +1,16 @@
 <?php
 include_once 'model/clsComputador.php';
+include_once 'model/clsCategoria.php';
+include_once 'model/clsModelo.php';
+include_once 'model/clsSetor.php';
+include_once 'model/clsResponsavel.php';
+include_once 'model/clsLocalizacao.php';
 include_once 'dao/clsComputadorDAO.php';
+include_once 'dao/clsCategoriaDAO.php';
+include_once 'dao/clsModeloDAO.php';
+include_once 'dao/clsSetorDAO.php';
+include_once 'dao/clsResponsavelDAO.php';
+include_once 'dao/clsLocalizacaoDAO.php';
 include_once 'dao/clsConexao.php';
 ?>
 
@@ -70,116 +80,151 @@ if( isset($_SESSION['logado']) &&
 			<input type="text" autocomplete="off" name="txtIP" />
 			
 			<label>Servicos : </label>
-			<input type="text" autocomplete="off" name="txtServicos" />
-		
+			<input type="text" autocomplete="off" name="txtServicos" />		
 		</div>
 		
-		<div class="form_item">
-		
+		<div class="form_item">		
 			<label>Modelo : </label>
 			<select name="stModelo" >			
-				<?php /*
-				$select = ModeloDAO::getModelos();			
+				<?php 
+				$select = ModeloDAO::getModelo();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>';
+					echo '<option value="0" selected disabled hidden> Nenhum Modelo foi encontrado </option>';
 				}else {
 					
-					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
 					
 					foreach ( $select as $modelo) {
-					echo '<option value='.$modelo->getID().'>'.$modelo->getNome().'</option>';
+					echo '<option value='.$modelo->getID().'>'.$modelo->getMDNOME().'</option>';
 					}
-				}*/
+				}
 				?>			
 			</select>
 			
-			<label>Responsavel : </label>
-			<select name="stResp" >			
-			<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>
-				<?php	/*
-				$select = ModeloDAO::getModelos();			
+			<label>Localizacao : </label>
+			<select name="stLocal" >			
+				<?php 
+				$select = LocalizacaoDAO::getLocalizacao();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>';
+					echo '<option value="" selected disabled hidden> Nenhuma Localizacao foi encontrado </option>';
 				}else {
 					
 					echo '<option value="" selected disabled hidden> Selecione... </option>';
 					
-					foreach ( $select as $modelo) {
-					echo '<option value='.$modelo->getID().'>'.$modelo->getNome().'</option>';
+					foreach ( $select as $localizacao) {
+					echo '<option value='.$localizacao->getID().'>'.$localizacao->getLZNOME().'</option>';
 					}
-				}*/
+				}
 				?>			
 			</select>
 
-			<label>Maquina Virtual : </label>
-			<input type="checkbox" value="Sim" name="txtPC" />
-			
-			<label>Servidor : </label>
-			<input type="checkbox" value="Sim" name="txtSV" />
-			
-			<label>Host : </label>
-			<select name="stPC" >	
-			<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>			
-				<?php	/*		
-				$select = ComputadorDAO::getComputadores();					
+			<label>Responsavel : </label>
+			<select name="stResp" >			
+			<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>
+				<?php	
+				$select = ResponsavelDAO::getResponsavel();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum host foi encontrado </option>';
+					echo '<option value="" selected disabled hidden> Nenhum Responsavel foi encontrado </option>';
 				}else {
 					
 					echo '<option value="" selected disabled hidden> Selecione... </option>';
 					
-					foreach ( $select as $computador) {
-					echo '<option value='.$computador->getID().'>'.$computador->getNome().'</option>';
+					foreach ( $select as $responsavel) {
+					echo '<option value='.$responsavel->getID().'>'.$responsavel->getRPNOME().'</option>';
 					}
-				}*/
+				}
+				?>			
+			</select>
+
+			<div class="checkbox" > <label>Maquina Virtual : </label>
+			<input type="checkbox" value="Sim" name="cbVT" /> </div>
+			
+			<div class="checkbox" > <label>Servidor : </label>
+			<input type="checkbox" value="Sim" name="cbSV" /> </div>
+			
+			<label>Host : </label>
+			<select name="stPC" >	
+				<?php			
+				$select = ComputadorDAO::getComputadores();					
+				if ( $select->count()==0){
+					echo '<option value="NULL" selected hidden> Nenhum host foi encontrado </option>';
+				}else {
+					
+					echo '<option value="NULL" selected hidden> Selecione... </option>';
+					
+					foreach ( $select as $computador) {
+					echo '<option value='.$computador->getID().'>'.$computador->getPCNOME().'</option>';
+					}
+				}
 				?>			
 			</select>
 			
 			<label>Descricao: </label>
-			<textarea id="descricao" name="txtDesc" > </textarea>
-			</div>		
-			<input class="button" type="submit" value="Salvar" />
+			<textarea id="descricao" name="txtDesc" > </textarea>						
+		</div>		
+			<input class="btnSalvar" type="submit" value="Salvar" />
 	</form>
 	
-	<!-- Form de Responsaveis -->
+					<!-- Form de Responsaveis 	 -->
+	<div id="responsaveis">
 	<form action="controller/salvarResponsavel.php?inserir" method="POST" >	
 		<div class="form_item">		
-		<label>Nome : </label>
-		<input type="checkbox" value="Sim" name="txtRPNOME" />		
 		<label>Setor : </label>
-			<select name="stSetor" >	
-			<option value="" selected disabled hidden> Nenhum Setor foi encontrado </option>			
-				<?php	/*		
-				$select = ComputadorDAO::getComputadores();					
+			<select name="stIDSETOR" >			
+				<?php 
+				$select = SetorDAO::getSetor();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum host foi encontrado </option>';
+					echo '<option value="" selected disabled hidden> Nenhum Setor foi encontrado </option>';
 				}else {
 					
 					echo '<option value="" selected disabled hidden> Selecione... </option>';
 					
-					foreach ( $select as $computador) {
-					echo '<option value='.$computador->getID().'>'.$computador->getNome().'</option>';
+					foreach ( $select as $setor) {
+					echo '<option value="'.$setor->getID().'">'.$setor->getSTNOME().'</option>';
 					}
-				}*/
+				}
 				?>			
-		</select>
-		<input class="button" type="submit" value="Salvar" />		
+			</select>
+			
+			<label>Nome do Responsavel : </label>
+			<input type="text" autocomplete="off" name="txtRPNOME" />			
+			<label>Cargo do Responsavel : </label>
+			<input type="text" autocomplete="off" name="txtRPCARGO" />			
+			<input class="btnSalvar" type="submit" value="Salvar" />
 		</div>
 	</form>	
-	
-		<!-- Form de Modelos -->
-	<form action="controller/salvarModelos.php?inserir" method="POST" >	
+	</div>
+					<!-- Form de Modelos -->
+	<div id="modelos">
+	<form action="controller/salvarModelo.php?inserir" method="POST" >	
 		<div class="form_item">		
-		<label>Nome do Modelo : </label>
-		<input type="checkbox" value="Sim" name="txtMDNOME" />		
-		<input class="button" type="submit" value="Salvar" />		
+		<label>Categoria : </label>
+			<select name="stCategoria" >			
+				<?php 
+				$select = CategoriaDAO::getCategoria();			
+				if ( $select->count()==0){
+					echo '<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>';
+				}else {
+					
+					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $categoria) {
+					echo '<option value="'.$categoria->getID().'">'.$categoria->getCATNOME().'</option>';
+					}
+				}
+				?>			
+			</select>
+			
+			<label>Nome do Modelo : </label>
+			<input type="text" autocomplete="off" name="txtMDNOME" />			
+			<input class="btnSalvar" type="submit" value="Salvar" />
+			
 		</div>
+	</div>
 	</form>	
 	
-					<!-- Tabelas -->
-		
-		<?php
-            
+					<!-- Tabelas -->		
+		<?php            
             $lista = ComputadorDAO::getComputadores();
             
             if ( $lista->count()==0){
@@ -224,16 +269,13 @@ if( isset($_SESSION['logado']) &&
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
-                }								
-				
-			}
-			
+                }						
+			}			
             ?>			
 	
 <?php
         }else{			
-		//Caso o usuario caso nao esteja logado
-		
+		//Caso o usuario caso nao esteja logado		
 		 header("Location: index.php");
 ?>
 	
@@ -242,6 +284,5 @@ if( isset($_SESSION['logado']) &&
 <?php
         }
 ?>
-
 </body>
 </html>

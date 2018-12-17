@@ -2,22 +2,22 @@
 
 class ResponsavelDAO {
 	
-	public static function inserir($modelo) {
+	public static function inserir($responsavel) {
 		  $sql = "INSERT INTO RESPONSAVEL "
                 . " ( RPNOME , RPCARGO , IDSETOR ) VALUES "
-                . " ( '". $modelo->getRPNOME()."' ,"
-				. "  '". $modelo->getRPCARGO()."' ,"
-				. "  ". $modelo->getIDSETOR()." ); ";
+                . " ( '". $responsavel->getRPNOME()."' ,"
+				. "  '". $responsavel->getRPCARGO()."' ,"
+				. "  ". $responsavel->getIDSETOR()." ); ";
 				
         Conexao::executar($sql);
 	}
 	
-	public static function editar( $modelo ){
+	public static function editar( $responsavel ){
         $sql =    "UPDATE RESPONSAVEL SET "
-                . " RPNOME = '".$modelo->getRPNOME()."' , "	
-				. " RPCARGO = '".$modelo->getRPNOME()."' , "
-				. " IDSETOR = ".$modelo->getRPNOME()." "				
-                . " WHERE ID = ".$modelo->getID();
+                . " RPNOME = '".$responsavel->getRPNOME()."' , "	
+				. " RPCARGO = '".$responsavel->getRPNOME()."' , "
+				. " IDSETOR = ".$responsavel->getRPNOME()." "				
+                . " WHERE ID = ".$responsavel->getID();
         Conexao::executar($sql);
     }
 	
@@ -34,12 +34,12 @@ class ResponsavelDAO {
         $lista = new ArrayObject();
         if( $result != NULL ){
             while( list($_ID, $_RPNOME , $_RPCARGO , $_IDSETOR ) = mysqli_fetch_row($result) ){
-                $modeloes = new Responsavel();
-                $modeloes->setID($_ID);               
-				$modeloes->setRPNOME($_RPNOME);	
-				$modeloes->setRPCARGO($_RPCARGO);	
-				$modeloes->setIDSETOR($_IDSETOR);					
-                $lista->append($modelos);
+                $responsavel = new Responsavel();
+                $responsavel->setID($_ID);               
+				$responsavel->setRPNOME($_RPNOME);	
+				$responsavel->setRPCARGO($_RPCARGO);	
+				$responsavel->setIDSETOR($_IDSETOR);					
+                $lista->append($responsavel);
             }
         }
         return $lista;
@@ -54,13 +54,13 @@ class ResponsavelDAO {
         $result = Conexao::consultar($sql);
       
         list( $_ID, $_RPNOME , $_RPCARGO , $_IDSETOR ) = mysqli_fetch_row($result);
-                $modelo = new Responsavel();
-                $modelo->setID($_ID);                
-				$modelo->setRPNOME($_RPNOME);
-				$modeloes->setRPCARGO($_RPCARGO);	
-				$modeloes->setIDSETOR($_IDSETOR);				
+                $responsavel = new Responsavel();
+                $responsavel->setID($_ID);                
+				$responsavel->setRPNOME($_RPNOME);
+				$responsavel->setRPCARGO($_RPCARGO);	
+				$responsavel->setIDSETOR($_IDSETOR);				
             
-        return $modelo;
+        return $responsavel;
     }
 	
 }

@@ -8,6 +8,7 @@ class Computador {
 	private $PCDESCRICAO;
 	private $PCSISOP;
 	private $PCCPU;
+	private $PCDISCO;
     private $PCLOCALIZACAO;
 	private $PCVIRTUAL;
 	private $PCSERVIDOR;
@@ -15,17 +16,22 @@ class Computador {
     private $PCSERVICOS;
 	private $IDPC;
 	private $IDRP;
+	private $IDMD;
     
     
     
     public function __construct( $ID = NULL, $PCLOCALIZACAO = NULL, $PCMEMORIA = NULL, $IDRP = NULL ,
             $PCNOME = NULL, $PCCPU = NULL, $PCMODELO = NULL, $PCSISOP = NULL,
-            $PCPATRIMONIO = NULL, $PCDESCRICAO = NULL , $PCVIRTUAL = NULL , $PCSERVICOS = NULL , $IDPC = NULL , $PCIP = NULL , $PCSERVIDOR = NULL){
+            $PCPATRIMONIO = NULL, $PCDISCO = NULL , $PCDESCRICAO = NULL , $PCVIRTUAL = NULL , $PCSERVICOS = NULL , $IDPC = NULL , $PCIP = NULL , $IDMD = NULL , $PCSERVIDOR = NULL){
         
     }
 	
     function getID() {
         return $this->ID;
+    }
+	
+	 function getPCDISCO() {
+        return $this->PCDISCO;
     }
 	
 	function getPCLOCALIZACAO() {
@@ -83,25 +89,29 @@ class Computador {
     function getPCDESCRICAO() {
         return $this->PCDESCRICAO;
     }
+	
+	function getIDMD() {
+        return $this->IDMD;
+    }
 
     function setID($ID) {
         $this->ID = $ID;
     }
 	
 	function setPCVIRTUAL($PCVIRTUAL) {
-        return $this->$PCVIRTUAL;
+        return $this->PCVIRTUAL = $PCVIRTUAL;
     }
 	
 	  function setPCSERVICOS($PCSERVICOS) {
-        return $this->$PCSERVICOS;
+        return $this->PCSERVICOS = $PCSERVICOS;
     }
 	
 	  function setIDPC($IDPC) {
-        return $this->$IDPC;
+        return $this->IDPC = $IDPC;
     }
 	
 	  function setPCIP($PCIP) {
-        return $this->$PCIP;
+        return $this->PCIP = $PCIP;
     }
 
     function setPCLOCALIZACAO($PCLOCALIZACAO) {
@@ -143,6 +153,13 @@ class Computador {
     function setPCDESCRICAO($PCDESCRICAO) {
         $this->PCDESCRICAO = $PCDESCRICAO;
     }
+	
+	function setIDMD($IDMD) {
+        return $this->IDMD = $IDMD;
+    }
 
+	function setPCDISCO($PCDISCO) {
+        return $this->PCDISCO = $PCDISCO;
+    }
     
     }

@@ -5,9 +5,9 @@ include_once '../dao/clsConexao.php';
 
 
 if( isset( $_REQUEST['inserir'] ) ){
-    $modelo = new modelo();
-    $modelo->setMDNOME( $_POST['txtNome']  );	
-    
+    $modelo = new Modelo();
+    $modelo->setMDNOME( $_POST['txtMDNOME']  );	
+    $modelo->setMDCATEGORIA( $_POST['stCategoria']  );	
     ModeloDAO::inserir($modelo);
     
     header("Location: ../computadores.php");
@@ -20,7 +20,7 @@ if( isset($_REQUEST['editar'])){
 
     $modelo = new Modelo();
     $modelo->setMDNOME( $_POST['txtMDNome']  );	
-    
+    $modelo->setMDCATEGORIA( $_POST['stCategoria']  );	
     ModeloDAO::editar($modelo);
     
     header("Location: ../computadores.php");

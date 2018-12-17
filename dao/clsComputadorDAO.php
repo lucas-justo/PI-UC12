@@ -4,22 +4,21 @@ class ComputadorDAO {
 	
 	public static function inserir($computador) {
 		  $sql = "INSERT INTO COMPUTADORES "
-                . " ( PCNOME , PCMODELO , PCPATRIMONIO , PCDESCRICAO , PCSISOP , PCCPU , PCMEMORIA, PCDISCO, PCLOCALIZACAO , PCVIRTUAL , PCSERVIDOR , PCIP, PCSERVICOS , IDPC , IDRP ) VALUES "
+                . " ( PCNOME , PCPATRIMONIO , PCDESCRICAO , PCSISOP , PCCPU , PCMEMORIA, PCDISCO, PCLOCALIZACAO , PCVIRTUAL , PCSERVIDOR , PCIP, PCSERVICOS , IDPC , IDRP , IDMD ) VALUES "
                 . " ( '" .$computador->getPCNOME()."' , "
-				. "  '" . $computador->getPCMODELO()."' , "
 				. "  '" . $computador->getPCPATRIMONIO()."' , "
 				. "  '" . $computador->getPCDESCRICAO()."' , "
 				. "  '" . $computador->getPCSISOP()."' , "
 				. "  " . $computador->getPCCPU()." , "
 				. "  '" . $computador->getPCMEMORIA()."' , "
 				. "  '" . $computador->getPCDISCO()."' , "
-				. "  '" . $computador->getPCLOCALIZACAO()."' , "
+				. "  " . $computador->getPCLOCALIZACAO()." , "
 				. "  '" . $computador->getPCVIRTUAL()."' , "
 				. "  '" . $computador->getPCSERVIDOR()."' , "
 				. "  '" . $computador->getPCIP()."' , "
 				. "  '" . $computador->getPCSERVICOS()."' , "
-				. "  '" . $computador->getIDPC()."' , "
-				. "  '" . $computador->getIDRP()."'  ); ";
+				. "  " . $computador->getIDPC()." , "
+				. "  " . $computador->getIDRP()."  ); ";
 				
         Conexao::executar($sql);
 	}
@@ -53,30 +52,30 @@ class ComputadorDAO {
     }
 	
 	public static function getComputadores(){
-        $sql = "SELECT PCNOME , PCMODELO , PCPATRIMONIO , PCDESCRICAO , PCSISOP , PCCPU , PCMEMORIA, PCDISCO, PCLOCALIZACAO , PCVIRTUAL , PCSERVIDOR, PCIP, PCSERVICOS , IDPC , IDRP  FROM COMPUTADORES ORDER BY PCNOME";
+        $sql = "SELECT PCNOME , PCPATRIMONIO , PCDESCRICAO , PCSISOP , PCCPU , PCMEMORIA, PCDISCO, PCLOCALIZACAO , PCVIRTUAL , PCSERVIDOR, PCIP, PCSERVICOS , IDPC , IDRP , IDMD  FROM COMPUTADORES ORDER BY PCNOME";
         $result = Conexao::consultar($sql);
         $lista = new ArrayObject();
         if( $result != NULL ){
-            while( list($_ID, $_PCNOME , $_PCMODELO , $_PCPATRIMONIO ,  $_PCDESCRICAO , $_PCSISOP , $_PCCPU , $_PCMEMORIA ,  $_PCDISCO , $_PCLOCALIZACAO , $_PCVIRTUAL , $_PCSERVIDOR , $_PCIP , $_PCSERVICOS , $_IDPC , $_IDRP) = mysqli_fetch_row($result) ){
-                $computadores = new Computador();
-                $computadores->setID($_ID);
-				$computadores->setPCNOME($_PCNOME);
-				$computadores->setPCMODELO($_PCMODELO);
-				$computadores->setPCPATRIMONIO($_PCPATRIMONIO);
-				$computadores->setPCDESCRICAO($_PCPATRIMONIO);
-                $computadores->setPCSISOP($_PCSISOP);
-				$computadores->setPCCPU($_PCCPU);
-				$computadores->setPCMEMORIA($_PCMEMORIA);
-				$computadores->setPCDISCO($_PCDISCO);
-				$computadores->setPCLOCALIZACAO($_PCLOCALIZACAO);
-				$computadores->setPCVIRTUAL($_PCMEMORIA);
-				$computadores->setPCSERVIDOR($_PCDISCO);
-				$computadores->setPCIP($_PCDISCO);
-				$computadores->setPCSERVICOS($_PCDISCO);
-				$computadores->setIDPC($_PCDISCO);
-				$computadores->setIDRP($_PCDISCO);
+            while( list($_ID, $_PCNOME , $_PCPATRIMONIO ,  $_PCDESCRICAO , $_PCSISOP , $_PCCPU , $_PCMEMORIA ,  $_PCDISCO , $_PCLOCALIZACAO , $_PCVIRTUAL , $_PCSERVIDOR , $_PCIP , $_PCSERVICOS , $_IDPC , $_IDRP , $_IDMD ) = mysqli_fetch_row($result) ){
+                $computador = new Computador();
+                $computador->setID($_ID);
+				$computador->setPCNOME($_PCNOME);
+				$computador->setPCPATRIMONIO($_PCPATRIMONIO);
+				$computador->setPCDESCRICAO($_PCPATRIMONIO);
+                $computador->setPCSISOP($_PCSISOP);
+				$computador->setPCCPU($_PCCPU);
+				$computador->setPCMEMORIA($_PCMEMORIA);
+				$computador->setPCDISCO($_PCDISCO);
+				$computador->setPCLOCALIZACAO($_PCLOCALIZACAO);
+				$computador->setPCVIRTUAL($_PCVIRTUAL);
+				$computador->setPCSERVIDOR($_PCSERVIDOR);
+				$computador->setPCIP($_PCIP);
+				$computador->setPCSERVICOS($_PCSERVICOS);
+				$computador->setIDPC($_IDPC);
+				$computador->setIDRP($_IDRP);
+				$computador->setIDMD($_IDMD);
 				
-                $lista->append($computadores);
+                $lista->append($computador);
             }
         }
         return $lista;
@@ -92,22 +91,22 @@ class ComputadorDAO {
       
         list( $_ID, $_PCNOME , $_PCMODELO , $_PCPATRIMONIO ,  $_PCDESCRICAO , $_PCSISOP , $_PCCPU , $_PCMEMORIA ,  $_PCDISCO , $_PCLOCALIZACAO , $_PCVIRTUAL , $_PCSERVIDOR , $_PCIP , $_PCSERVICOS , $_IDPC , $_IDRP ) = mysqli_fetch_row($result);
                 $computador = new Computador();
-                  $computadores->setID($_ID);
-				$computadores->setPCNOME($_PCNOME);
-				$computadores->setPCMODELO($_PCMODELO);
-				$computadores->setPCPATRIMONIO($_PCPATRIMONIO);
-				$computadores->setPCDESCRICAO($_PCPATRIMONIO);
-                $computadores->setPCSISOP($_PCSISOP);
-				$computadores->setPCCPU($_PCCPU);
-				$computadores->setPCMEMORIA($_PCMEMORIA);
-				$computadores->setPCDISCO($_PCDISCO);
-				$computadores->setPCLOCALIZACAO($_PCLOCALIZACAO);
-				$computadores->setPCVIRTUAL($_PCMEMORIA);
-				$computadores->setPCSERVIDOR($_PCDISCO);
-				$computadores->setPCIP($_PCDISCO);
-				$computadores->setPCSERVICOS($_PCDISCO);
-				$computadores->setIDPC($_PCDISCO);
-				$computadores->setIDRP($_PCDISCO);
+                  $computador->setID($_ID);
+				$computador->setPCNOME($_PCNOME);
+				$computador->setPCMODELO($_PCMODELO);
+				$computador->setPCPATRIMONIO($_PCPATRIMONIO);
+				$computador->setPCDESCRICAO($_PCPATRIMONIO);
+                $computador->setPCSISOP($_PCSISOP);
+				$computador->setPCCPU($_PCCPU);
+				$computador->setPCMEMORIA($_PCMEMORIA);
+				$computador->setPCDISCO($_PCDISCO);
+				$computador->setPCLOCALIZACAO($_PCLOCALIZACAO);
+				$computador->setPCVIRTUAL($_PCMEMORIA);
+				$computador->setPCSERVIDOR($_PCDISCO);
+				$computador->setPCIP($_PCDISCO);
+				$computador->setPCSERVICOS($_PCDISCO);
+				$computador->setIDPC($_PCDISCO);
+				$computador->setIDRP($_PCDISCO);
 				
             
         return $computador;

@@ -15,7 +15,7 @@ class Responsavel{
     }
 
     function getRPNOME() {
-        return $this->RPCODIGO;
+        return $this->RPNOME;
     }
 	
 	function getRPCARGO() {
@@ -31,7 +31,7 @@ class Responsavel{
     }
 
     function setRPNOME($RPNOME) {
-        $this->STNOME = $RPNOME;
+        $this->RPNOME = $RPNOME;
     }
 	
 	function setRPCARGO($RPCARGO) {

@@ -24,22 +24,22 @@ class LocalizacaoDAO {
         
     }
 	
-	public static function getModelo(){
+	public static function getLocalizacao(){
         $sql = "SELECT ID, LZNOME FROM LOCALIZACAO ORDER BY LZNOME";
         $result = Conexao::consultar($sql);
         $lista = new ArrayObject();
         if( $result != NULL ){
             while( list($_ID, $_LZNOME ) = mysqli_fetch_row($result) ){
-                $locais = new Localizacao();
-                $locais->setID($_ID);               
-				$locais->setLZNOME($_LZNOME);				
-                $lista->append($locais);
+                $localizacao = new Localizacao();
+                $localizacao->setID($_ID);               
+				$localizacao->setLZNOME($_LZNOME);				
+                $lista->append($localizacao);
             }
         }
         return $lista;
     }
 	
-	 public static function getModeloById( $id ){
+	 public static function getLocalizacaoById( $id ){
         $sql = " SELECT ID , LZNOME "
              . " FROM LOCALIZACAO "
              . " WHERE ID = ".$id

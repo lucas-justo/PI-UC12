@@ -3,8 +3,10 @@
 class Modelo{
     private $ID;
     private $MDNOME;
+	private $MDCATEGORIA;
     
-    public function __construct( $ID = NULL, $MDNOME = NULL ){
+    
+    public function __construct( $ID = NULL, $MDNOME = NULL , $MDCATEGORIA = NULL ){
         
     }
     function getID() {
@@ -14,6 +16,10 @@ class Modelo{
     function getMDNOME() {
         return $this->MDNOME;
     }
+	
+	function getMDCATEGORIA() {
+        return $this->MDCATEGORIA;
+    }
 
     function setID($ID) {
         $this->ID = $ID;
@@ -21,6 +27,10 @@ class Modelo{
 
     function setMDNOME($MDNOME) {
         $this->MDNOME = $MDNOME;
+    }
+	
+	function setMDCATEGORIA($MDCATEGORIA) {
+        $this->MDCATEGORIA = $MDCATEGORIA;
     }
 
     

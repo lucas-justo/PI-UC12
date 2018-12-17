@@ -6,8 +6,8 @@ include_once '../dao/clsConexao.php';
 
 if( isset( $_REQUEST['inserir'] ) ){
     $responsavel = new Responsavel();
-    $responsavel->setRPNOME( $_POST['txtRPNome']  );	
-	$responsavel->setRPCARGO( $_POST['txtRPCargo']  );
+    $responsavel->setRPNOME( $_POST['txtRPNOME']  );	
+	$responsavel->setRPCARGO( $_POST['txtRPCARGO']  );
 	$responsavel->setIDSETOR( $_POST['stIDSETOR']  );	
     
     ResponsavelDAO::inserir($responsavel);
@@ -21,8 +21,8 @@ if( isset($_REQUEST['editar'])){
     $responsavel = ResponsavelDAO::getResponsavelById($id);
 
     $responsavel = new Responsavel();
-    $responsavel->setRPNOME( $_POST['txtMDNome']  );
-	$responsavel->setRPCARGO( $_POST['txtRPCargo']  );
+    $responsavel->setRPNOME( $_POST['txtMDNOME']  );
+	$responsavel->setRPCARGO( $_POST['txtRPCARGO']  );
 	$responsavel->setIDSETOR( $_POST['stIDSETOR']  );	
     
     ResponsavelDAO::editar($responsavel);
@@ -34,7 +34,7 @@ if( isset($_REQUEST['editar'])){
 if( isset($_REQUEST['excluir'])){
     $id = $_REQUEST['idResponsavel'];
     echo '<br><br><hr> '
-       . '<h3>Confirma a exclusão do modelo </h3> '
+       . '<h3>Confirma a exclusão do Responsavel </h3> '
        . '<br><hr>';
     echo  '<a href="?confirmaExcluir&idResponsavel='.$id.'">'
         . '    <button>SIM</button></a> ';

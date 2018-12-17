@@ -30,10 +30,10 @@ class SetorDAO {
         $lista = new ArrayObject();
         if( $result != NULL ){
             while( list($_ID, $_STNOME ) = mysqli_fetch_row($result) ){
-                $setores = new Setor();
-                $setores->setID($_ID);               
-				$setores->setSTNOME($_STNOME);				
-                $lista->append($setores);
+                $setor = new Setor();
+                $setor->setID($_ID);               
+				$setor->setSTNOME($_STNOME);				
+                $lista->append($setor);
             }
         }
         return $lista;
