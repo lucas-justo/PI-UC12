@@ -2,50 +2,39 @@
 
 class Monitor{
     private $ID;
-    private $MTRESPONSAVEL;
-    private $MTSETOR;
-    private $MTCARGO;
     private $MTNOME;
-    private $MTNOMEANTIGO;
-    private $MTMODELO;
-    private $MTMODELOANTIGO;
     private $MTPATRIMONIO;
     private $MTDESCRICAO;
+	private $IDPC;
+	private $IDRP;
+	private $IDMD;
     
-    public function __construct( $ID = NULL, $MTRESPONSAVEL = NULL, $MTSETOR = NULL, $MTCARGO = NULL,
-            $MTNOME = NULL, $MTNOMEANTIGO = NULL, $MTMODELO = NULL, $MTMODELOANTIGO = NULL, $MTPATRIMONIO = NULL, $MTDESCRICAO = NULL ){
+    public function __construct( $ID = NULL ,
+            $MTNOME = NULL, $MTPATRIMONIO = NULL, $MTDESCRICAO = NULL , $IDPC = NULL , $IDRP = NULL , $IDMD = NULL ){
         
     }
     function getID() {
         return $this->ID;
     }
 
-    function getMTRESPONSAVEL() {
-        return $this->MTRESPONSAVEL;
+    function getIDPC() {
+        return $this->IDPC;
     }
 
-    function getMTSETOR() {
-        return $this->MTSETOR;
+    function getIDRP() {
+        return $this->IDRP;
+    }
+	
+	 function getIDMD() {
+        return $this->IDMD;
     }
 
     function getMTCARGO() {
-        return $this->MTCARGO;
+        return $this->IDMD;
     }
 
     function getMTNOME() {
         return $this->MTNOME;
-    }
-
-    function getMTNOMEANTIGO() {
-        return $this->MTNOMEANTIGO;
-    }
-
-    function getMTMODELO() {
-        return $this->MTMODELO;
-    }
-
-    function getMTMODELOANTIGO() {
-        return $this->MTMODELOANTIGO;
     }
 
     function getMTPATRIMONIO() {
@@ -60,32 +49,20 @@ class Monitor{
         $this->ID = $ID;
     }
 
-    function setMTRESPONSAVEL($MTRESPONSAVEL) {
-        $this->MTRESPONSAVEL = $MTRESPONSAVEL;
+    function setIDPC($IDPC) {
+        $this->IDPC = $IDPC;
     }
 
-    function setMTSETOR($MTSETOR) {
-        $this->MTSETOR = $MTSETOR;
+    function setIDRP($IDRP) {
+        $this->IDRP = $IDRP;
     }
-
-    function setMTCARGO($MTCARGO) {
-        $this->MTCARGO = $MTCARGO;
+	
+	 function setIDMD($IDMD) {
+        $this->IDMD = $IDMD;
     }
 
     function setMTNOME($MTNOME) {
         $this->MTNOME = $MTNOME;
-    }
-
-    function setMTNOMEANTIGO($MTNOMEANTIGO) {
-        $this->MTNOMEANTIGO = $MTNOMEANTIGO;
-    }
-
-    function setMTMODELO($MTMODELO) {
-        $this->MTMODELO = $MTMODELO;
-    }
-
-    function setMTMODELOANTIGO($MTMODELOANTIGO) {
-        $this->MTMODELOANTIGO = $MTMODELOANTIGO;
     }
 
     function setMTPATRIMONIO($MTPATRIMONIO) {

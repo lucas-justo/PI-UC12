@@ -3,6 +3,10 @@
 class ModeloDAO {
 	
 	public static function inserir($modelo) {
+		if($modelo->getMDCATEGORIA() == 0){
+		$modelo->setMDCATEGORIA('NULL');
+		}
+		
 		  $sql = "INSERT INTO MODELOS "
                 . " ( MDNOME , MDCATEGORIA ) VALUES "
                 . " ( '". $modelo->getMDNOME()."' , "
@@ -42,15 +46,15 @@ class ModeloDAO {
         return $lista;
     }
 	
-	 public static function getModeloById( $id ){
+	 public static function getModeloById( $idModelo ){
         $sql = " SELECT ID , MDNOME , MDCATEGORIA "
              . " FROM MODELOS "
-             . " WHERE ID = ".$id
+             . " WHERE ID = ".$idModelo
              . " ORDER BY MDNOME ";
         
         $result = Conexao::consultar($sql);
       
-        list( $_ID, $_MDNOME ) = mysqli_fetch_row($result);
+        list( $_ID, $_MDNOME , $_MDCATEGORIA ) = mysqli_fetch_row($result);
                 $modelo = new Modelo();
                 $modelo->setID($_ID);                
 				$modelo->setMDNOME($_MDNOME);	

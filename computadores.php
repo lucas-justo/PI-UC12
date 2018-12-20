@@ -17,7 +17,6 @@ include_once 'dao/clsConexao.php';
 <!DOCTYPE HTML>
 <html>
 <header>
-
 <meta charset="UTF-8">
 <link rel="stylesheet" href="styles.css">
 <title> Portal Web - Computadores </title>
@@ -59,28 +58,28 @@ if( isset($_SESSION['logado']) &&
 	
 		<div class="form_item">		
 			<label>Nome da Maquina : </label>
-			<input type="text" autocomplete="off" name="txtNome" />
+			<input type="text" autocomplete="off" value="teste01" name="txtNome" />
 
 			<label>Numero de CPUs : </label>
-			<input type="text" autocomplete="off" name="txtCPU" />
+			<input type="text" autocomplete="off" value="4" name="txtCPU" />
 			
 			<label>Tamanho da Memoria : </label>
-			<input type="text" autocomplete="off" name="txtMemoria" />
+			<input type="text" autocomplete="off" value="2gb" name="txtMemoria" />
 			
 			<label>Tamanho do Disco : </label>
-			<input type="text" autocomplete="off" name="txtDisco" />
+			<input type="text" autocomplete="off" value="500gb" name="txtDisco" />
 			
 			<label>Patrimonio : </label>
-			<input type="text" autocomplete="off" name="txtPatrimonio" />
+			<input type="text" autocomplete="off" value="1035b" name="txtPatrimonio" />
 			
 			<label>Sistema Operacional : </label>
-			<input type="text" autocomplete="off" name="txtSistema" />
+			<input type="text" autocomplete="off" value="Windows" name="txtSistema" />
 			
 			<label>IP Fixo (Se possuir) : </label>
-			<input type="text" autocomplete="off" name="txtIP" />
+			<input type="text" autocomplete="off" value="10.10.0.1" name="txtIP" />
 			
 			<label>Servicos : </label>
-			<input type="text" autocomplete="off" name="txtServicos" />		
+			<input type="text" autocomplete="off" value="DNS" name="txtServicos" />		
 		</div>
 		
 		<div class="form_item">		
@@ -106,10 +105,10 @@ if( isset($_SESSION['logado']) &&
 				<?php 
 				$select = LocalizacaoDAO::getLocalizacao();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhuma Localizacao foi encontrado </option>';
+					echo '<option value="0" selected disabled hidden> Nenhuma Localizacao foi encontrado </option>';
 				}else {
 					
-					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
 					
 					foreach ( $select as $localizacao) {
 					echo '<option value='.$localizacao->getID().'>'.$localizacao->getLZNOME().'</option>';
@@ -124,10 +123,10 @@ if( isset($_SESSION['logado']) &&
 				<?php	
 				$select = ResponsavelDAO::getResponsavel();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum Responsavel foi encontrado </option>';
+					echo '<option value="0" selected disabled hidden> Nenhum Responsavel foi encontrado </option>';
 				}else {
 					
-					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
 					
 					foreach ( $select as $responsavel) {
 					echo '<option value='.$responsavel->getID().'>'.$responsavel->getRPNOME().'</option>';
@@ -135,10 +134,12 @@ if( isset($_SESSION['logado']) &&
 				}
 				?>			
 			</select>
-
+			
+			<input name="cbVT" value="Nao" type="hidden">
 			<div class="checkbox" > <label>Maquina Virtual : </label>
 			<input type="checkbox" value="Sim" name="cbVT" /> </div>
 			
+			<input name="cbSV" value="Nao" type="hidden">
 			<div class="checkbox" > <label>Servidor : </label>
 			<input type="checkbox" value="Sim" name="cbSV" /> </div>
 			
@@ -147,10 +148,10 @@ if( isset($_SESSION['logado']) &&
 				<?php			
 				$select = ComputadorDAO::getComputadores();					
 				if ( $select->count()==0){
-					echo '<option value="NULL" selected hidden> Nenhum host foi encontrado </option>';
+					echo '<option value="0" selected hidden> Nenhum host foi encontrado </option>';
 				}else {
 					
-					echo '<option value="NULL" selected hidden> Selecione... </option>';
+					echo '<option value="0" selected hidden> Selecione... </option>';
 					
 					foreach ( $select as $computador) {
 					echo '<option value='.$computador->getID().'>'.$computador->getPCNOME().'</option>';
@@ -160,13 +161,16 @@ if( isset($_SESSION['logado']) &&
 			</select>
 			
 			<label>Descricao: </label>
-			<textarea id="descricao" name="txtDesc" > </textarea>						
+			<textarea id="descricao" name="txtDesc" >sem descricao</textarea>
+					
 		</div>		
 			<input class="btnSalvar" type="submit" value="Salvar" />
 	</form>
 	
+	
+	<div id="formulariossecundarios">
 					<!-- Form de Responsaveis 	 -->
-	<div id="responsaveis">
+	<div class="modelos">
 	<form action="controller/salvarResponsavel.php?inserir" method="POST" >	
 		<div class="form_item">		
 		<label>Setor : </label>
@@ -174,10 +178,10 @@ if( isset($_SESSION['logado']) &&
 				<?php 
 				$select = SetorDAO::getSetor();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum Setor foi encontrado </option>';
+					echo '<option value="0" selected disabled hidden> Nenhum Setor foi encontrado </option>';
 				}else {
 					
-					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
 					
 					foreach ( $select as $setor) {
 					echo '<option value="'.$setor->getID().'">'.$setor->getSTNOME().'</option>';
@@ -195,7 +199,7 @@ if( isset($_SESSION['logado']) &&
 	</form>	
 	</div>
 					<!-- Form de Modelos -->
-	<div id="modelos">
+	<div class="modelos">
 	<form action="controller/salvarModelo.php?inserir" method="POST" >	
 		<div class="form_item">		
 		<label>Categoria : </label>
@@ -203,10 +207,10 @@ if( isset($_SESSION['logado']) &&
 				<?php 
 				$select = CategoriaDAO::getCategoria();			
 				if ( $select->count()==0){
-					echo '<option value="" selected disabled hidden> Nenhum modelo foi encontrado </option>';
+					echo '<option value="0" selected disabled hidden> Nenhum modelo foi encontrado </option>';
 				}else {
 					
-					echo '<option value="" selected disabled hidden> Selecione... </option>';
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
 					
 					foreach ( $select as $categoria) {
 					echo '<option value="'.$categoria->getID().'">'.$categoria->getCATNOME().'</option>';
@@ -222,7 +226,7 @@ if( isset($_SESSION['logado']) &&
 		</div>
 	</div>
 	</form>	
-	
+	</div>
 					<!-- Tabelas -->		
 		<?php            
             $lista = ComputadorDAO::getComputadores();
@@ -235,30 +239,68 @@ if( isset($_SESSION['logado']) &&
         <table border="1">
             <tr>
                 <th>ID</th>
-				 <th>Setor</th>
-				  <th>Nome</th>
-				    <th>Modelo</th>
-				     <th>Nome Antigo</th>				 
-						<th>Modelo Antigo</th>
-						 <th>Patrimonio</th>
-						 <th>Nome do Responsavel</th>
-						  <th>Descricao</th>
+				 <th>Nome</th>
+				  <th>Patrimonio</th>
+				    <th>Sistema</th>
+				     <th>CPU</th>				 
+						<th>Memoria</th>
+						 <th>Disco</th>
+						 <th>Localizacao</th>
+						 <th>IP Fixo</th>
+						 <th>Servicos</th>
+						  <th>Responsavel</th>
+						   <th>Setor</th>
+						    <th>Modelo</th>
+							<th>Maquina Virtual?</th>
+							<th>Servidor?</th>
+							<th>Host</th>
+						    <th>Descricao</th>
+							<th>Monitor</th>
+							
                 <th>Editar</th>
                 <th>Excluir</th>
             </tr>
             
             <?php 
                 foreach ($lista as $computador) {
+					$idComputador = $computador->getIDPC();
+					$idResponsavel = $computador->getIDRP();
+					$idModelo = $computador->getIDMD();
+					$idLocalizacao = $computador->getPCLOCALIZACAO();
+					$host = @ComputadorDAO::getComputadorById( $idComputador );
+					$responsavel = @ResponsavelDAO::getResponsavelById( $idResponsavel );
+					$modelo = @ModeloDAO::getModeloById( $idModelo );
+					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
+					$setor = "";
+					if(isset($responsavel)){
+						$idSetor = $responsavel->getIDSETOR();
+						$setor = @SetorDAO::getSetorById( $idSetor );
+					}
+					
                     echo '<tr>
                         <td>'.$computador->getID().'</td>
-						<td>'.$computador->getPCSETOR().'</td>
                         <td>'.$computador->getPCNOME().'</td>
-						<td>'.$computador->getPCMODELO().'</td>
-                        <td>'.$computador->getPCNOMEANTIGO().'</td>
-						<td>'.$computador->getPCMODELOANTIGO().'</td>
 						<td>'.$computador->getPCPATRIMONIO().'</td>
-						<td>'.$computador->getPCCARGO().'</td>
+                        <td>'.$computador->getPCSISOP().'</td>
+						<td>'.$computador->getPCCPU().'</td>
+						<td>'.$computador->getPCMEMORIA().'</td>
+						<td>'.$computador->getPCDISCO().'</td>
+						
+						<td>'.$localizacao->getLZNOME().'</td>
+						
+						<td>'.$computador->getPCIP().'</td>
+						<td>'.$computador->getPCSERVICOS().'</td>
+						
+						<td>'.$responsavel->getRPNOME().'</td>						
+						<td>'.$setor->getSTNOME().'</td>		
+						
+						<td>'.$modelo->getMDNOME().'</td>
+						
+						<td>'.$computador->getPCVIRTUAL().'</td>
+						<td>'.$computador->getPCSERVIDOR().'</td>
+						<td>'.$host->getPCNOME().'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
+						<td>'.'monitor'.'</td>
                 
                         <td> 
                             <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">

@@ -1,5 +1,21 @@
 
-body {	background-color:#FEFAF6; text-align: center; }
+body {	background-color:#FEFAF6; text-align: center; font-family: Consolas;}
+
+table {
+	background-color: #d5eddd;
+	border: none;
+	border-collapse: collapse;
+}
+
+th{
+	padding: 8px;
+	background-color: #A1DAA4;
+}
+
+tr{
+	padding: 8px;
+	color: #334c3b;
+}
 
 #container {
 	display: flex;
@@ -26,6 +42,12 @@ hr {
 	background-color: #f2c6e9;
 	height: 1px;
 	margin: 10px;	
+}
+
+#formulariossecundarios{
+	display: flex;
+	flex-direction: row;
+	margin: 4px;
 }
 
 /* botoes e menus */
@@ -82,7 +104,7 @@ font-size: 16px;
 padding: 16px;
 padding-left: 34px;
 padding-right: 34px;
-background-color:#D1E8EE;
+background-color:#d5e2d0;
 color: #191e1a;
 font-family: "Consolas";	
 margin-left: 0 auto; 
@@ -199,8 +221,6 @@ form {
 
 input{ margin:8px; margin:0 auto; }
 
-
-
 #login {
 	margin: 14px;
 	display: flex;
@@ -214,29 +234,18 @@ input{ margin:8px; margin:0 auto; }
 
 #centro {align-self: center; margin: auto;}
 
-#modelos {
+.modelos {
 	margin:8px;
 	padding: 8px;
 	border-width: 6px;
 	border-style: dashed;
+	border-color: #a59577;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-}
-
-#responsaveis {
-	margin:8px;
-	padding: 8px;
-	border-width: 6px;
-	border-style: dashed;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	
+	background-color: #ede9d7;
 }
 
 .checkbox{

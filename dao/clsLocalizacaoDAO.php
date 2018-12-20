@@ -39,10 +39,10 @@ class LocalizacaoDAO {
         return $lista;
     }
 	
-	 public static function getLocalizacaoById( $id ){
+	 public static function getLocalizacaoById( $idLocalizacao ){
         $sql = " SELECT ID , LZNOME "
              . " FROM LOCALIZACAO "
-             . " WHERE ID = ".$id
+             . " WHERE ID = ".$idLocalizacao
              . " ORDER BY LZNOME ";
         
         $result = Conexao::consultar($sql);

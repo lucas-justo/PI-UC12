@@ -76,7 +76,6 @@ CREATE TABLE MONITORES
 (
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
     MTNOME VARCHAR(50) ,
-    MTMODELO VARCHAR(100) ,
     MTPATRIMONIO VARCHAR(100)  ,
     MTDESCRICAO VARCHAR(100) ,
     IDPC INT ,
@@ -87,18 +86,29 @@ CREATE TABLE MONITORES
     FOREIGN KEY (IDRP) REFERENCES RESPONSAVEL(ID)
 );
 
---------------------------------------------------------------
+CREATE TABLE admin
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+	login VARCHAR(50) ,
+	senha VARCHAR(50)
+    );
+
+INSERT INTO admin ( login , senha )
+VALUES ( 'usuario' , 'e8d95a51f3af4a3b134bf6bb680a213a' )
+
+----------------------------------------------------------------------
+ignorar daqui para baixo pois esta desatualizado com a nova estrutura
+----------------------------------------------------------------------
 
 CREATE TABLE IMPRESSORAS
 (
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
     ISNOME VARCHAR(100) ,    
-    ISMODELO VARCHAR(100) ,
     ISIP VARCHAR(100) , 
-    ISSETOR VARCHAR(50) ,
     ISDESCRICAO VARCHAR(50) ,
     ISPATRIMONIO VARCHAR(100) ,
-    ISDESTINO VARCHAR(100) 
+    IDSETOR INT NULL 
+
     );
 
  CREATE TABLE PONTOS
@@ -127,12 +137,4 @@ CREATE TABLE IMPRESSORAS
     STPATRIMONIO VARCHAR(100) 
     );
 
-  CREATE TABLE admin
-(
-	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-	login VARCHAR(50) ,
-	senha VARCHAR(50)
-    );
 
-INSERT INTO admin (login , senha)
-VALUES ('usuario' , 'e8d95a51f3af4a3b134bf6bb680a213a')

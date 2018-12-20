@@ -3,7 +3,6 @@
 class Computador {
     private $ID;
 	private $PCNOME;
-	private $PCMODELO;
 	private $PCPATRIMONIO;
 	private $PCDESCRICAO;
 	private $PCSISOP;
@@ -21,7 +20,7 @@ class Computador {
     
     
     public function __construct( $ID = NULL, $PCLOCALIZACAO = NULL, $PCMEMORIA = NULL, $IDRP = NULL ,
-            $PCNOME = NULL, $PCCPU = NULL, $PCMODELO = NULL, $PCSISOP = NULL,
+            $PCNOME = NULL, $PCCPU = NULL, $PCSISOP = NULL,
             $PCPATRIMONIO = NULL, $PCDISCO = NULL , $PCDESCRICAO = NULL , $PCVIRTUAL = NULL , $PCSERVICOS = NULL , $IDPC = NULL , $PCIP = NULL , $IDMD = NULL , $PCSERVIDOR = NULL){
         
     }
@@ -72,10 +71,6 @@ class Computador {
 
     function getPCCPU() {
         return $this->PCCPU;
-    }
-
-    function getPCMODELO() {
-        return $this->PCMODELO;
     }
 
     function getPCSISOP() {
@@ -135,12 +130,9 @@ class Computador {
     }
 	
 	function setPCSERVIDOR($PCSERVIDOR) {
-        $this->PCCPU = $PCSERVIDOR;
+        $this->PCSERVIDOR = $PCSERVIDOR;
     }
 
-    function setPCMODELO($PCMODELO) {
-        $this->PCMODELO = $PCMODELO;
-    }
 
     function setPCSISOP($PCSISOP) {
         $this->PCSISOP = $PCSISOP;

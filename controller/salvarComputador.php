@@ -18,11 +18,12 @@ if( isset( $_REQUEST['inserir'] ) ){
 	$computador->setIDPC( $_POST['stPC']  );
 	$computador->setPCVIRTUAL( $_POST['cbVT']  );
 	$computador->setPCSERVIDOR( $_POST['cbSV']  );
+	$computador->setPCSERVICOS( $_POST['txtServicos']  );
 	$computador->setPCDESCRICAO( $_POST['txtDesc']  );
-    $computador->setIDMD( $_POST['stLocal']  );
+    $computador->setPCLOCALIZACAO( $_POST['stLocal']  );
     ComputadorDAO::inserir($computador);
     
-    header("Location: ../computadores.php");
+   header("Location: ../computadores.php");
 }
 
 if( isset($_REQUEST['editar'])){
@@ -31,18 +32,21 @@ if( isset($_REQUEST['editar'])){
     $computador = ComputadorDAO::getComputadorById($id);
 
     $computador = new Computador();
-    $computador->setPCNOME( $_POST['txtNome']  );
+	$computador->setPCNOME( $_POST['txtNome']  );
 	$computador->setPCCPU( $_POST['txtCPU']  );
+	$computador->setPCDISCO( $_POST['txtDisco']  );
 	$computador->setPCMEMORIA( $_POST['txtMemoria']  );
-	$computador->setPCMODELO( $_POST['stModelo']  );
+	$computador->setIDMD( $_POST['stModelo']  );
 	$computador->setPCSISOP( $_POST['txtSistema']  );
 	$computador->setPCPATRIMONIO( $_POST['txtPatrimonio']  );
 	$computador->setPCIP( $_POST['txtIP']  );
 	$computador->setIDRP( $_POST['stResp']  );
 	$computador->setIDPC( $_POST['stPC']  );
-	$computador->setPCVIRTUAL( $_POST['stPC']  );
-	$computador->setPCSERVIDOR( $_POST['txtSV']  );
+	$computador->setPCVIRTUAL( $_POST['cbVT']  );
+	$computador->setPCSERVIDOR( $_POST['cbSV']  );
+	$computador->setPCSERVICOS( $_POST['txtServicos']  );
 	$computador->setPCDESCRICAO( $_POST['txtDesc']  );
+    $computador->setPCLOCALIZACAO( $_POST['stLocal']  );
     
     ComputadorDAO::editar($computador);
     

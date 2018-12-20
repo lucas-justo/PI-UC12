@@ -39,10 +39,10 @@ class SetorDAO {
         return $lista;
     }
 	
-	 public static function getSetorById( $id ){
+	 public static function getSetorById( $idSetor ){
         $sql = " SELECT ID , STNOME "
              . " FROM SETOR "
-             . " WHERE ID = ".$id
+             . " WHERE ID = ".$idSetor
              . " ORDER BY STNOME ";
         
         $result = Conexao::consultar($sql);

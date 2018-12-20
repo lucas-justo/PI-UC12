@@ -3,6 +3,9 @@
 class ResponsavelDAO {
 	
 	public static function inserir($responsavel) {
+		if($responsavel->getRPCARGO() == 0){
+		$responsavel->setRPCARGO('NULL');}
+		
 		  $sql = "INSERT INTO RESPONSAVEL "
                 . " ( RPNOME , RPCARGO , IDSETOR ) VALUES "
                 . " ( '". $responsavel->getRPNOME()."' ,"
@@ -45,10 +48,10 @@ class ResponsavelDAO {
         return $lista;
     }
 	
-	 public static function getResponsavelById( $id ){
+	 public static function getResponsavelById( $idResponsavel ){
         $sql = " SELECT ID , RPNOME , RPCARGO , IDSETOR"
              . " FROM RESPONSAVEL "
-             . " WHERE ID = ".$id
+             . " WHERE ID = ".$idResponsavel
              . " ORDER BY RPNOME ";
         
         $result = Conexao::consultar($sql);
