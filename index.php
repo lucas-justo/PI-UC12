@@ -30,7 +30,10 @@
 
 	</div>
 
-<img src="pancake.jpg"/>
+<h3>Todos os cadastros (Equipamentos) estao funcionais e livres para teste</h3>
+<h3>Tela de Pesquisa parcialmente funcional com funcoes basicas</h3>
+<h3>Edicao de tabelas em Construcao</h3>
+<h3>Tela de gerenciacao de Servidores em construcao</h3>
 
    <?php
         }else{

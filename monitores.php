@@ -52,10 +52,10 @@ if( isset($_SESSION['logado']) &&
 <li  class="menu3" >   <a href="pontos.php">Pontos</a></li> 
 <li  class="menu3" >   <a href="switches.php">Switches</a></li>
 </div>
-
-	<form action="controller/salvarMonitor.php?inserir" method="POST" >
-	
-		<div class="form_item">		
+<h2>Cadastrar Monitor</h2>	
+<div id="container_cadastros">
+	<form class="container_formularios" action="controller/salvarMonitor.php?inserir" method="POST" >
+		<div class="modelos">	
 		<label>Nome: </label>
         <input type="text" autocomplete="off" name="txtNome" />
 		<label>Patrimonio: </label>
@@ -78,7 +78,7 @@ if( isset($_SESSION['logado']) &&
 			</select>
 		</div>
 		
-		<div class="form_item">
+		<div class="modelos">
 		<label>PC associado ao Monitor : </label>
 			<select name="stPC" >			
 				<?php 
@@ -117,10 +117,13 @@ if( isset($_SESSION['logado']) &&
 			
 		<label>Descricao: </label>
         <textarea id="descricao" name="txtDesc" > </textarea>
-		</div>		
-        <input class="button" type="submit" value="Salvar" />
-		</form>
 		
+		<input class="btnSalvar" type="submit" value="Salvar" />
+		</div>		 
+		</form>
+</div>	
+
+
 		<?php
             
             $lista = MonitorDAO::getMonitores();
@@ -130,7 +133,7 @@ if( isset($_SESSION['logado']) &&
             }else {
         ?>
         
-        <table border="1">
+        <table id="tables" border="1">
             <tr>
                 <th>ID</th>
 				  <th>Nome</th>
@@ -183,7 +186,6 @@ if( isset($_SESSION['logado']) &&
 			}
 			
             ?>			
-	
 <?php
         }else{
 		 header("Location: index.php");

@@ -4,17 +4,27 @@ class _Switch{
     private $ID;
     private $STCODIGO;
     private $STIP;
-    private $STMODELO;
     private $STUSER;
     private $STSENHA;
     private $STPATRIMONIO;
+	private $IDMD;
+	private $IDSETOR;
+	private $STDESCRICAO;
     
-    public function __construct( $ID = NULL, $STCODIGO = NULL, $STIP = NULL, $STMODELO = NULL, 
-            $STUSER = NULL, $STSENHA = NULL, $STPATRIMONIO = NULL ){
+    public function __construct( $ID = NULL, $STCODIGO = NULL, $STIP = NULL, $IDMD = NULL, 
+            $STUSER = NULL, $STSENHA = NULL, $STPATRIMONIO = NULL , $IDSETOR = NULL , $STDESCRICAO = NULL ){
         
     }
     function getID() {
         return $this->ID;
+    }
+	
+	 function getIDSETOR() {
+        return $this->IDSETOR;
+    }
+	
+	 function getSTDESCRICAO() {
+        return $this->STDESCRICAO;
     }
 
     function getSTCODIGO() {
@@ -25,8 +35,8 @@ class _Switch{
         return $this->STIP;
     }
 
-    function getSTMODELO() {
-        return $this->STMODELO;
+    function getIDMD() {
+        return $this->IDMD;
     }
 
     function getSTUSER() {
@@ -53,8 +63,12 @@ class _Switch{
         $this->STIP = $STIP;
     }
 
-    function setSTMODELO($STMODELO) {
-        $this->STMODELO = $STMODELO;
+    function setIDMD($IDMD) {
+        $this->IDMD = $IDMD;
+    }
+	
+	function setIDSETOR($IDSETOR) {
+        $this->IDSETOR = $IDSETOR;
     }
 
     function setSTUSER($STUSER) {
@@ -69,6 +83,9 @@ class _Switch{
         $this->STPATRIMONIO = $STPATRIMONIO;
     }
 
+    function setSTDESCRICAO($STDESCRICAO) {
+        $this->STDESCRICAO = $STDESCRICAO;
+    }
 
     
 }

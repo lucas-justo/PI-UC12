@@ -5,17 +5,16 @@ class Ponto{
     private $PTCODIGO;
     private $PTIP;
     private $PTPORTA;
-    private $PTSWITCH;
     private $PTDESCRICAO;
     private $PTPATRIMONIO;
     private $PTMAC;
-    private $PTQUADRANTE;
-    private $PTANDAR;
-    private $PTSETOR;
-    
+    private $IDMD;
+    private $IDSETOR;
+    private $IDSWITCH;
+	
     public function __construct( $ID = NULL, $PTCODIGO = NULL, $PTIP = NULL, $PTPORTA = NULL, 
-            $PTSWITCH = NULL, $PTDESCRICAO = NULL, $PTPATRIMONIO = NULL, $PTMAC = NULL, $PTQUADRANTE = NULL, $PTANDAR = NULL, 
-            $PTSETOR = NULL ){
+            $IDSWITCH = NULL, $PTDESCRICAO = NULL, $PTPATRIMONIO = NULL, $PTMAC = NULL, 
+            $IDSETOR = NULL ,    $IDMD = NULL ){
         
     }
     function getID() {
@@ -34,8 +33,8 @@ class Ponto{
         return $this->PTPORTA;
     }
 
-    function getPTSWITCH() {
-        return $this->PTSWITCH;
+    function getIDSWITCH() {
+        return $this->IDSWITCH;
     }
 
     function getPTDESCRICAO() {
@@ -50,16 +49,13 @@ class Ponto{
         return $this->PTMAC;
     }
 
-    function getPTQUADRANTE() {
-        return $this->PTQUADRANTE;
+
+    function getIDMD() {
+        return $this->IDMD;
     }
 
-    function getPTANDAR() {
-        return $this->PTANDAR;
-    }
-
-    function getPTSETOR() {
-        return $this->PTSETOR;
+    function getIDSETOR() {
+        return $this->IDSETOR;
     }
 
     function setID($ID) {
@@ -78,8 +74,8 @@ class Ponto{
         $this->PTPORTA = $PTPORTA;
     }
 
-    function setPTSWITCH($PTSWITCH) {
-        $this->PTSWITCH = $PTSWITCH;
+    function setIDSWITCH($IDSWITCH) {
+        $this->IDSWITCH = $IDSWITCH;
     }
 
     function setPTDESCRICAO($PTDESCRICAO) {
@@ -94,16 +90,13 @@ class Ponto{
         $this->PTMAC = $PTMAC;
     }
 
-    function setPTQUADRANTE($PTQUADRANTE) {
-        $this->PTQUADRANTE = $PTQUADRANTE;
+
+    function setIDMD($IDMD) {
+        $this->IDMD = $IDMD;
     }
 
-    function setPTANDAR($PTANDAR) {
-        $this->PTANDAR = $PTANDAR;
-    }
-
-    function setPTSETOR($PTSETOR) {
-        $this->PTSETOR = $PTSETOR;
+    function setIDSETOR($IDSETOR) {
+        $this->IDSETOR = $IDSETOR;
     }
 
 

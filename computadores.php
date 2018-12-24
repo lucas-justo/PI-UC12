@@ -35,7 +35,7 @@ if( isset($_SESSION['logado']) &&
 
 					<!-- Menus -->
 
-	<div id="header">
+<div id="header">
  <li  class="menu" >   <a href="index.php">        		Inicio</a></li>	
  <li  class="menu" >   <a href="equipamentos.php">      Equipamentos</a></li> 
  <li  class="menu" >   <a href="servidores.php">        Servidores</a></li>
@@ -53,36 +53,37 @@ if( isset($_SESSION['logado']) &&
 </div>
 
 					<!-- Formularios -->
-
-	<form action="controller/salvarComputador.php?inserir" method="POST" >
+<div id="container_cadastros">
+	<form class="container_formularios" action="controller/salvarComputador.php?inserir" method="POST" >
 	
-		<div class="form_item">		
+		<div class="modelos">	
+			<h2>Cadastrar um Computador</h2>
 			<label>Nome da Maquina : </label>
-			<input type="text" autocomplete="off" value="teste01" name="txtNome" />
+			<input type="text" autocomplete="off" name="txtNome" />
 
 			<label>Numero de CPUs : </label>
-			<input type="text" autocomplete="off" value="4" name="txtCPU" />
+			<input type="text" autocomplete="off" name="txtCPU" />
 			
 			<label>Tamanho da Memoria : </label>
-			<input type="text" autocomplete="off" value="2gb" name="txtMemoria" />
+			<input type="text" autocomplete="off" name="txtMemoria" />
 			
 			<label>Tamanho do Disco : </label>
-			<input type="text" autocomplete="off" value="500gb" name="txtDisco" />
+			<input type="text" autocomplete="off" name="txtDisco" />
 			
 			<label>Patrimonio : </label>
-			<input type="text" autocomplete="off" value="1035b" name="txtPatrimonio" />
+			<input type="text" autocomplete="off" name="txtPatrimonio" />
 			
 			<label>Sistema Operacional : </label>
-			<input type="text" autocomplete="off" value="Windows" name="txtSistema" />
+			<input type="text" autocomplete="off" name="txtSistema" />
 			
 			<label>IP Fixo (Se possuir) : </label>
-			<input type="text" autocomplete="off" value="10.10.0.1" name="txtIP" />
+			<input type="text" autocomplete="off" name="txtIP" />
 			
 			<label>Servicos : </label>
-			<input type="text" autocomplete="off" value="DNS" name="txtServicos" />		
+			<input type="text" autocomplete="off" name="txtServicos" />		
 		</div>
 		
-		<div class="form_item">		
+		<div class="modelos">		
 			<label>Modelo : </label>
 			<select name="stModelo" >			
 				<?php 
@@ -162,17 +163,16 @@ if( isset($_SESSION['logado']) &&
 			
 			<label>Descricao: </label>
 			<textarea id="descricao" name="txtDesc" >sem descricao</textarea>
-					
+			<input class="btnSalvar" type="submit" value="Salvar" />		
 		</div>		
-			<input class="btnSalvar" type="submit" value="Salvar" />
+			
 	</form>
 	
-	
-	<div id="formulariossecundarios">
+	</div>
+	<div class="container_formularios">
 					<!-- Form de Responsaveis 	 -->
-	<div class="modelos">
-	<form action="controller/salvarResponsavel.php?inserir" method="POST" >	
-		<div class="form_item">		
+	<form class="modelos" action="controller/salvarResponsavel.php?inserir" method="POST" >	
+		<h2>Cadastrar Responsaveis</h1>	
 		<label>Setor : </label>
 			<select name="stIDSETOR" >			
 				<?php 
@@ -195,13 +195,10 @@ if( isset($_SESSION['logado']) &&
 			<label>Cargo do Responsavel : </label>
 			<input type="text" autocomplete="off" name="txtRPCARGO" />			
 			<input class="btnSalvar" type="submit" value="Salvar" />
-		</div>
 	</form>	
-	</div>
 					<!-- Form de Modelos -->
-	<div class="modelos">
-	<form action="controller/salvarModelo.php?inserir" method="POST" >	
-		<div class="form_item">		
+	<form class="modelos" action="controller/salvarModelo.php?inserir" method="POST" >	
+	<h2>Cadastrar Modelos</h1>	
 		<label>Categoria : </label>
 			<select name="stCategoria" >			
 				<?php 
@@ -223,10 +220,9 @@ if( isset($_SESSION['logado']) &&
 			<input type="text" autocomplete="off" name="txtMDNOME" />			
 			<input class="btnSalvar" type="submit" value="Salvar" />
 			
-		</div>
-	</div>
 	</form>	
-	</div>
+	<!--</div>-->
+</div>
 					<!-- Tabelas -->		
 		<?php            
             $lista = ComputadorDAO::getComputadores();

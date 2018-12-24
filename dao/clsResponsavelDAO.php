@@ -3,8 +3,6 @@
 class ResponsavelDAO {
 	
 	public static function inserir($responsavel) {
-		if($responsavel->getRPCARGO() == 0){
-		$responsavel->setRPCARGO('NULL');}
 		
 		  $sql = "INSERT INTO RESPONSAVEL "
                 . " ( RPNOME , RPCARGO , IDSETOR ) VALUES "

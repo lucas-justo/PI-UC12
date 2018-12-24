@@ -1,20 +1,27 @@
 
 body {	background-color:#FEFAF6; text-align: center; font-family: Consolas;}
 
+label{
+	padding: 4px;	
+}
+
 table {
 	background-color: #d5eddd;
 	border: none;
-	border-collapse: collapse;
+	margin: 4px;
+	border-radius: 2px;
 }
 
 th{
 	padding: 8px;
 	background-color: #A1DAA4;
+	border-radius: 2px;
 }
 
 tr{
 	padding: 8px;
 	color: #334c3b;
+	border-radius: 2px;
 }
 
 #container {
@@ -28,6 +35,20 @@ tr{
 h1 {
 	font-family: "Consolas";
 	color:#ba6084;
+}
+
+h2 {
+	font-size: 22px;
+	color:#ba6084;
+	justify-self: flex-start;
+	align-self: center;
+}
+
+h3 {
+	font-size: 22px;
+	color:#ba3b56;
+	justify-self: flex-start;
+	align-self: center;
 }
 
 
@@ -44,11 +65,7 @@ hr {
 	margin: 10px;	
 }
 
-#formulariossecundarios{
-	display: flex;
-	flex-direction: row;
-	margin: 4px;
-}
+
 
 /* botoes e menus */
 
@@ -104,10 +121,14 @@ font-size: 16px;
 padding: 16px;
 padding-left: 34px;
 padding-right: 34px;
-background-color:#d5e2d0;
+background-color:#a55c78;
 color: #191e1a;
 font-family: "Consolas";	
-margin-left: 0 auto; 
+margin: auto auto 0
+}
+
+.btnSalvar:hover {
+background-color:#b7738d;
 }
 
 .button:hover {
@@ -197,29 +218,28 @@ font-size: 16px;
 
 
 /* forms e inputs */
-form {
-	display: flex;
-	flex-direction: row;
-	align-items: center;	
-}
+
 
 .form_item {
-	margin: 14px;
+
+}
+
+.container_formularios{
 	display: flex;
-	flex-direction: column;
-	font-family: "Consolas";
-	color:#ba6084;
-	font-size: 18px;
+	flex-direction: row;
+	align-items: stretch;
+	margin: 4px;
+	flex-wrap:none;
 }
 
 #descricao {
-	
+	align-self:center;
 	height: 100px;
 	width: 250px;
 	
 }
 
-input{ margin:8px; margin:0 auto; }
+/*input{ margin:8px; margin:0 auto; }*/
 
 #login {
 	margin: 14px;
@@ -235,17 +255,17 @@ input{ margin:8px; margin:0 auto; }
 #centro {align-self: center; margin: auto;}
 
 .modelos {
-	margin:8px;
+	margin:2px;
 	padding: 8px;
 	border-width: 6px;
 	border-style: dashed;
 	border-color: #a59577;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	text-align: center;
+	justify-content: start;
 	background-color: #ede9d7;
+
 }
 
 .checkbox{
@@ -256,4 +276,15 @@ font-size: 16px;
 text-align: center;
 color: #490c2a;
 }
+
+#container_cadastros{
+padding: 8px;
+display: flex;
+align-items: space-around;
+justify-content: space-evenly;
+width:100%;
+height:100%;
+margin: 8px;
+}
+
 /* */
