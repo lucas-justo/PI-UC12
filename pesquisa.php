@@ -1,10 +1,10 @@
 <?php
 include_once 'model/clsMonitor.php';
+include_once 'model/clsModelo.php';
 include_once 'model/clsComputador.php';
-include_once 'model/clsServidor.php';
 include_once 'dao/clsMonitorDAO.php';
 include_once 'dao/clsComputadorDAO.php';
-include_once 'dao/clsServidorDAO.php';
+include_once 'dao/clsModeloDAO.php';
 include_once 'dao/clsConexao.php';
 include_once 'dao/clsPesquisaDAO.php';
 
@@ -46,24 +46,77 @@ if( isset($_SESSION['logado']) &&
 	
 <div class="container_cadastros">
 
-	<form class="container_formularios" action="controller/teste.php?pesquisarNome" method="POST" >
-		<div class="form_item">		
+<div class="modelos">
+<h2> Pesquisar Computadores </h2>
+	<form class="container_formularios" action="controller/teste.php?pesquisarPCNome" method="POST" >	
 		<label>Pesquisar por Nome: </label>
-		<input type="text" autocomplete="off" name="txtNome" />		
-		<input class="button" type="submit" value="Pesquisar" />		
+		<input type="text" autocomplete="off" name="txtPCNome" />		
+		<input class="btnSalvar" type="submit" value="Pesquisar" />		
 	</form>
 	
-	<form class="container_formularios" action="controller/teste.php?pesquisarPatrimonio" method="POST" >
-		<div class="form_item">		
+	<form class="container_formularios" action="controller/teste.php?pesquisarPCPatrimonio" method="POST" >	
 		<label>Pesquisar por Patrimonio: </label>
-		<input type="text" autocomplete="off" name="txtPatrimonio" />		
-		<input class="button" type="submit" value="Pesquisar" />		
+		<input type="text" autocomplete="off" name="txtPCPatrimonio" />		
+		<input class="btnSalvar" type="submit" value="Pesquisar" />		
+	</form>		
+	<form class="container_formularios" action="controller/teste.php?pesquisarPCModelo" method="POST" >
+		<label>Pesquisar por Modelo : </label>		
+		<select name="stPCModelo" >			
+				<?php 
+				$select = ModeloDAO::getModelo();			
+				if ( $select->count()==0){
+					echo '<option value="0" selected disabled hidden> Nenhum Modelo foi encontrado </option>';
+				}else {
+					
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $modelo) {
+					echo '<option value='.$modelo->getID().'>'.$modelo->getMDNOME().'</option>';
+					}
+				}
+				?>			
+			</select>		
+		<input class="btnSalvar" type="submit" value="Pesquisar" />		
 	</form>
-		
 </div>
-		
-		
+
+<div class="modelos">
+<h2> Pesquisar Monitores </h2>
+<form class="container_formularios" action="controller/teste.php?pesquisarMTModelo" method="POST" >
+		<label>Pesquisar por Modelo : </label>		
+		<select name="stMTModelo" >			
+				<?php 
+				$select = ModeloDAO::getModelo();			
+				if ( $select->count()==0){
+					echo '<option value="0" selected disabled hidden> Nenhum Modelo foi encontrado </option>';
+				}else {
+					
+					echo '<option value="0" selected disabled hidden> Selecione... </option>';
+					
+					foreach ( $select as $modelo) {
+					echo '<option value='.$modelo->getID().'>'.$modelo->getMDNOME().'</option>';
+					}
+				}
+				?>			
+			</select>		
+		<input class="btnSalvar" type="submit" value="Pesquisar" />		
+</form>
 	
+<form class="container_formularios" action="controller/teste.php?pesquisarMTPatrimonio" method="POST" >		
+		<label>Pesquisar por Patrimonio: </label>
+		<input type="text" autocomplete="off" name="txtMTPatrimonio" />
+		<input class="btnSalvar" type="submit" value="Pesquisar" />		
+</form>	
+
+<form class="container_formularios" action="controller/teste.php?pesquisarMTNome" method="POST" >		
+		<label>Pesquisar por Nome: </label>
+		<input type="text" autocomplete="off" name="txtMTNome" />
+		<input class="btnSalvar" type="submit" value="Pesquisar" />		
+</form>	
+	
+</div>
+</div>
+
 <?php
         }else{
 		 header("Location: index.php");

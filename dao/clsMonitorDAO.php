@@ -39,7 +39,7 @@ class MonitorDAO {
 	
 	public static function excluir( $idMonitor ){
         $sql =    "DELETE FROM MONITORES "
-                . " WHERE ID = ".$idmonitor;
+                . " WHERE ID = ".$idMonitor;
         Conexao::executar($sql);
         
     }
@@ -74,13 +74,13 @@ class MonitorDAO {
       
         list( $_ID, $_MTNOME , $_MTPATRIMONIO , $_MTDESCRICAO , $_IDPC , $_IDRP , $_IDMD ) = mysqli_fetch_row($result);
                 $monitor = new Monitor();
-                 $monitores->setID($_ID);
-				$monitores->setMTNOME($_MTNOME);
-				$monitores->setMTPATRIMONIO($_MTPATRIMONIO);
-				$monitores->setMTDESCRICAO($_MTDESCRICAO);
-				$monitores->setIDPC($_IDPC);
-				$monitores->setIDRP($_IDRP);
-				$monitores->setIDMD($_IDMD);
+                $monitor->setID($_ID);
+				$monitor->setMTNOME($_MTNOME);
+				$monitor->setMTPATRIMONIO($_MTPATRIMONIO);
+				$monitor->setMTDESCRICAO($_MTDESCRICAO);
+				$monitor->setIDPC($_IDPC);
+				$monitor->setIDRP($_IDRP);
+				$monitor->setIDMD($_IDMD);
             
         return $monitor;
     }

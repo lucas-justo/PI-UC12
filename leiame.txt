@@ -1,7 +1,9 @@
+a estrutura completa do banco pode ser encontrada no arquivo estrutura.txt
+
 a fazer (master): 
-implementar switches e pontos
-finalizar edicao
-finalizar pesquisa
+Finalizado
 
 a fazer (portalweb):
-tudo
+finalizar edicao
+finalizar pesquisa
+implementar funcoes de gerenciamento dos servidores

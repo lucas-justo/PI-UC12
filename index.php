@@ -34,6 +34,11 @@
 <h3>Tela de Pesquisa parcialmente funcional com funcoes basicas</h3>
 <h3>Edicao de tabelas em Construcao</h3>
 <h3>Tela de gerenciacao de Servidores em construcao</h3>
+ <?php 
+//exec('wmic baseboard get product', $output);
+ //foreach($output as $line){
+ //echo "<h2>".$line."</h2>"; }
+ ?>
 
    <?php
         }else{
