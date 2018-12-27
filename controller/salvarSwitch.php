@@ -21,10 +21,8 @@ if( isset( $_REQUEST['inserir'] ) ){
 
 if( isset($_REQUEST['editar'])){
     
-    $id = $_REQUEST['idServidor'];
-    $switch = SwitchDAO::getSwitchById($id);
-
-     $switch = new _Switch();
+    $switch = new _Switch();
+	$switch->setID( $_REQUEST['idSwitch'] );
     $switch->setSTCODIGO( $_POST['txtNome']  );
 	$switch->setSTPATRIMONIO( $_POST['txtPatrimonio']  );
 	$switch->setSTIP( $_POST['txtIP']  );
@@ -32,8 +30,7 @@ if( isset($_REQUEST['editar'])){
 	$switch->setSTSENHA( $_POST['txtSenha']  );
 	$switch->setSTDESCRICAO( $_POST['txtDesc']  );
     $switch->setIDSETOR( $_POST['stSetor']  );
-	$switch->setIDMD( $_POST['stModelo']  );    
-    
+	$switch->setIDMD( $_POST['stModelo']  );
     SwitchDAO::editar($switch);
     
     header("Location: ../switches.php");

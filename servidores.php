@@ -3,6 +3,7 @@ include_once 'model/clsComputador.php';
 include_once 'model/clsCategoria.php';
 include_once 'model/clsModelo.php';
 include_once 'model/clsSetor.php';
+include_once 'model/clsMonitor.php';
 include_once 'model/clsResponsavel.php';
 include_once 'model/clsLocalizacao.php';
 include_once 'dao/clsComputadorDAO.php';
@@ -11,6 +12,7 @@ include_once 'dao/clsModeloDAO.php';
 include_once 'dao/clsSetorDAO.php';
 include_once 'dao/clsResponsavelDAO.php';
 include_once 'dao/clsLocalizacaoDAO.php';
+include_once 'dao/clsMonitorDAO.php';
 include_once 'dao/clsConexao.php';
 ?>
 
@@ -89,11 +91,18 @@ if( isset($_SESSION['logado']) &&
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
 					$setor = "";
+					$monitor = @MonitorDAO::getMonitorByIDPC( $idComputador );
 					if(isset($responsavel)){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
-					
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
+					if($monitor != NULL){
+						$monitornome = $monitor->getMTNOME();
+						$monitorid = $monitor->getID();
+					}else{$monitornome = "Nao"; $monitorid = "";}
                     echo '<tr>
                         <td>'.$computador->getID().'</td>
                         <td>'.$computador->getPCNOME().'</td>
@@ -115,13 +124,13 @@ if( isset($_SESSION['logado']) &&
 						
 						<td>'.$computador->getPCVIRTUAL().'</td>
 						<td>'.$computador->getPCSERVIDOR().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
-						<td>'.'monitor'.'</td>
+						<td><a href="monitores.php#'.$monitorid.'">'.$monitornome.'</td>
                 
                         <td> 
-                            <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">
-                            <button class="button2">!</button></a>
+                             <a href="computadores.php#'.$computador->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
                             <a href="controller/salvarComputador.php?excluir&idComputador='.$computador->getID().'">
@@ -134,7 +143,7 @@ if( isset($_SESSION['logado']) &&
 	
 <?php
         }else{			
-		//Caso o usuario caso nao esteja logado		
+		//Caso o usuario nao esteja logado		
 		 header("Location: index.php");
 ?>
 	

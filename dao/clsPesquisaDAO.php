@@ -108,7 +108,7 @@ class PesquisaDAO {
              . " FROM MONITORES "
              . " WHERE MTPATRIMONIO = '".$patrimonio."' ";        
         $result = Conexao::consultar($sql);
-		 $lista = new ArrayObject();
+		$lista = new ArrayObject();
         if( $result != NULL ){      
          while( list( $_ID, $_MTNOME , $_MTPATRIMONIO , $_MTDESCRICAO , $_IDPC , $_IDRP , $_IDMD  ) = mysqli_fetch_row($result)){
                 $monitor = new Monitor();

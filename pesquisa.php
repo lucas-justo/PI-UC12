@@ -7,9 +7,6 @@ include_once 'dao/clsComputadorDAO.php';
 include_once 'dao/clsModeloDAO.php';
 include_once 'dao/clsConexao.php';
 include_once 'dao/clsPesquisaDAO.php';
-
-            
-
 ?>
 
 <!DOCTYPE HTML>

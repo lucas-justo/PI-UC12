@@ -27,11 +27,8 @@ if( isset( $_REQUEST['inserir'] ) ){
 }
 
 if( isset($_REQUEST['editar'])){
-    
-    $id = $_REQUEST['idServidor'];
-    $computador = ComputadorDAO::getComputadorById($id);
-
     $computador = new Computador();
+	$computador->setID( $_REQUEST['idComputador'] );
 	$computador->setPCNOME( $_POST['txtNome']  );
 	$computador->setPCCPU( $_POST['txtCPU']  );
 	$computador->setPCDISCO( $_POST['txtDisco']  );

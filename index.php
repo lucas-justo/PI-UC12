@@ -27,13 +27,14 @@
 <li  class="menu" > <a href="pesquisa.php">			    Pesquisar</a></li>
 
 <a href="sair.php"><button class="button">Sair</button></a>
+</div>
 
-	</div>
+<!-- <h2>IP do Servidor :</h2>  <h2>Temperatura :</h2> -->
+<h3>Computadores :</h3>
+<h3>Monitores :</h3>
+<h3>Pontos WIFI :</h3>
+<h3>Switches :</h3>
 
-<h3>Todos os cadastros (Equipamentos) estao funcionais e livres para teste</h3>
-<h3>Tela de Pesquisa parcialmente funcional com funcoes basicas</h3>
-<h3>Edicao de tabelas em Construcao</h3>
-<h3>Tela de gerenciacao de Servidores em construcao</h3>
  <?php 
 //exec('wmic baseboard get product', $output);
  //foreach($output as $line){
@@ -43,7 +44,7 @@
    <?php
         }else{
    ?>
-	<h1>Você não tem permissão para acessar o Portal, faça login para continuar!</h1>
+	<h1>Você não tem permissão para acessar o Portal, faça login para continuar</h1>
 
  <form  id="login" action="entrar.php" method="POST" >
 		

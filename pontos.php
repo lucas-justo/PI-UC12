@@ -12,6 +12,35 @@ include_once 'dao/clsSetorDAO.php';
 include_once 'dao/clsSwitchDAO.php';
 include_once 'dao/clsLocalizacaoDAO.php';
 include_once 'dao/clsConexao.php';
+
+$idPonto = 0;
+$nome = "";
+$patrimonio = "";
+$descricao = "";
+$ip = "";
+$mac = "";
+$porta = 0;
+$_setor = 0;
+$_modelo = 0;
+$_switch = 0;
+$action = "inserir";
+
+if( isset($_REQUEST['editar'])){
+    $idPonto = $_REQUEST['idPonto'];
+    $pontoEditar = PontoDAO::getPontoById( $idPonto );
+    $nome = $pontoEditar->getPTCODIGO();
+	$patrimonio = $pontoEditar->getPTPATRIMONIO();
+	$descricao = $pontoEditar->getPTDESCRICAO();
+	$idPonto = $pontoEditar->getID();
+	$ip = $pontoEditar->getPTIP();
+	$mac = $pontoEditar->getPTMAC();
+	$porta = $pontoEditar->getPTPORTA();
+	$_setor = $pontoEditar->getIDSETOR();
+	$_modelo = $pontoEditar->getIDMD();
+	$_switch = $pontoEditar->getIDSWITCH();
+    $action = "editar&idPonto=".$idPonto;
+    
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -49,15 +78,16 @@ if( isset($_SESSION['logado']) &&
 <li  class="menu3" style="background-color:#dce8ce;" >   <a href="pontos.php">Pontos</a></li> 
 <li  class="menu3" >   <a href="switches.php">Switches</a></li>
 </div>	
+
 <h2> Cadastrar Pontos de Acesso WIFI </h2>	
+
 <div id="container_cadastros">
-	<form class="container_formularios" action="controller/salvarPonto.php?inserir" method="POST" >
-	
+	<form class="container_formularios" action="controller/salvarPonto.php?<?php echo $action; ?>" method="POST" >	
 		<div class="modelos">		
 		<label>Codigo de Identificacao do Ponto: </label>
-        <input type="number" autocomplete="off" name="txtNome" />
+        <input type="number" autocomplete="off" name="txtNome" value="<?php echo $nome; ?>" />
 		<label>Patrimonio: </label>
-        <input type="text" autocomplete="off" name="txtPatrimonio" />
+        <input type="text" autocomplete="off" name="txtPatrimonio" value="<?php echo $patrimonio; ?>" />
 			<label>Modelo : </label>
 			<select name="stModelo" >			
 				<?php 
@@ -76,13 +106,13 @@ if( isset($_SESSION['logado']) &&
 			</select>
 			
 		<label>IP : </label>
-        <input type="text" autocomplete="off" name="txtIP" />
+        <input type="text" autocomplete="off" name="txtIP" value="<?php echo $ip; ?>" />
 		
 		<label>Porta do Switch em que o Ponto esta conectado : </label>
-        <input type="number" autocomplete="off" name="txtPorta" />
+        <input type="number" autocomplete="off" name="txtPorta" value="<?php echo $porta; ?>" />
 		
 		<label>Endereco MAC : </label>
-        <input type="text" autocomplete="off" name="txtMAC" />				
+        <input type="text" autocomplete="off" name="txtMAC" value="<?php echo $mac; ?>" />				
 
 
 		<label>Switch em que o ponto esta ligado : </label>
@@ -120,7 +150,7 @@ if( isset($_SESSION['logado']) &&
 			</select>
 			
 		<label>Descricao: </label>
-        <textarea id="descricao" name="txtDesc" > </textarea>
+        <textarea id="descricao" name="txtDesc" ><?php echo $descricao; ?></textarea>
 		        <input class="btnSalvar" type="submit" value="Salvar" />
 		</div>
 		</form>
@@ -143,6 +173,7 @@ if( isset($_SESSION['logado']) &&
 						<th>IP</th>
 						 <th>MAC</th>
 						  <th>Setor</th>
+						  <th>Switch</th>
 						   <th>Descricao</th>
                 <th>Editar</th>
                 <th>Excluir</th>
@@ -157,6 +188,14 @@ if( isset($_SESSION['logado']) &&
 					$setor = @SetorDAO::getSetorById( $idSetor );
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					
+					if($switch != NULL){
+						$switchname = $switch->getSTCODIGO();
+					}else{$switchname = "X";}
+					
+					if($setor != NULL){
+						$setorname = $setor->getSTNOME();
+					}else{$setorname = "X";}
+					
                     echo '<tr>
                         <td>'.$ponto->getID().'</td>
                         <td>'.$ponto->getPTCODIGO().'</td>
@@ -164,11 +203,12 @@ if( isset($_SESSION['logado']) &&
 						<td>'.$ponto->getPTPATRIMONIO().'</td>
 						<td>'.$ponto->getPTIP().'</td>
 						<td>'.$ponto->getPTMAC().'</td>
-						<td>'.$setor->getSTNOME().'</td>
+						<td>'.$setorname.'</td>
+						<td><a href="switches.php#'.$idSwitch.'">'.$switchname.'</td>
 						<td>'.$ponto->getPTDESCRICAO().'</td>
                 
                         <td>
-                            <a href="controller/salvarPonto.php?editar&idPonto='.$ponto->getID().'">
+                            <a href="?editar&idPonto='.$ponto->getID().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>

@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(~E_ALL & ~E_NOTICE);
 
 include_once '../model/clsComputador.php';
 include_once '../model/clsMonitor.php';
@@ -73,7 +73,7 @@ if( isset( $_REQUEST['pesquisarPCNome'] ) ){
 						  <th>Responsavel</th>
 						   <th>Setor</th>
 						    <th>Modelo</th>
-							<th>Maquina Virtual?</th>
+							<th>Virtual?</th>
 							<th>Servidor?</th>
 							<th>Host</th>
 						    <th>Descricao</th>
@@ -92,11 +92,18 @@ if( isset( $_REQUEST['pesquisarPCNome'] ) ){
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
 					$setor = "";
+					$monitor = @MonitorDAO::getMonitorByIDPC( $idComputador );
 					if(isset($responsavel)){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
-					
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
+					if($monitor != NULL){
+						$monitornome = $monitor->getMTNOME();
+						$monitorid = $monitor->getID();
+					}else{$monitornome = "Nao"; $monitorid = "";}
                     echo '<tr>
                         <td>'.$computador->getID().'</td>
                         <td>'.$computador->getPCNOME().'</td>
@@ -118,16 +125,16 @@ if( isset( $_REQUEST['pesquisarPCNome'] ) ){
 						
 						<td>'.$computador->getPCVIRTUAL().'</td>
 						<td>'.$computador->getPCSERVIDOR().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
-						<td>'.'monitor'.'</td>
+						<td><a href="../monitores.php#'.$monitorid.'">'.$monitornome.'</td>
                 
                         <td> 
-                            <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">
-                            <button class="button2">!</button></a>
+                            <a href="../computadores.php#'.$computador->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarComputador.php?excluir&idComputador='.$computador->getID().'">
+                            <a href="salvarComputador.php?excluir&idComputador='.$computador->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
@@ -190,7 +197,7 @@ if( isset( $_REQUEST['pesquisarPCModelo'] ) ){
 						  <th>Responsavel</th>
 						   <th>Setor</th>
 						    <th>Modelo</th>
-							<th>Maquina Virtual?</th>
+							<th>Virtual?</th>
 							<th>Servidor?</th>
 							<th>Host</th>
 						    <th>Descricao</th>
@@ -209,11 +216,18 @@ if( isset( $_REQUEST['pesquisarPCModelo'] ) ){
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
 					$setor = "";
+					$monitor = @MonitorDAO::getMonitorByIDPC( $idComputador );
 					if(isset($responsavel)){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
-					
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
+					if($monitor != NULL){
+						$monitornome = $monitor->getMTNOME();
+						$monitorid = $monitor->getID();
+					}else{$monitornome = "Nao"; $monitorid = "";}
                     echo '<tr>
                         <td>'.$computador->getID().'</td>
                         <td>'.$computador->getPCNOME().'</td>
@@ -235,16 +249,16 @@ if( isset( $_REQUEST['pesquisarPCModelo'] ) ){
 						
 						<td>'.$computador->getPCVIRTUAL().'</td>
 						<td>'.$computador->getPCSERVIDOR().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
-						<td>'.'monitor'.'</td>
+						<td><a href="../monitores.php#'.$monitorid.'">'.$monitornome.'</td>
                 
                         <td> 
-                            <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">
-                            <button class="button2">!</button></a>
+                            <a href="../computadores.php#'.$computador->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarComputador.php?excluir&idComputador='.$computador->getID().'">
+                            <a href="/salvarComputador.php?excluir&idComputador='.$computador->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
@@ -306,7 +320,7 @@ if( isset( $_REQUEST['pesquisarPCPatrimonio'] ) ){
 						  <th>Responsavel</th>
 						   <th>Setor</th>
 						    <th>Modelo</th>
-							<th>Maquina Virtual?</th>
+							<th>Virtual?</th>
 							<th>Servidor?</th>
 							<th>Host</th>
 						    <th>Descricao</th>
@@ -325,11 +339,18 @@ if( isset( $_REQUEST['pesquisarPCPatrimonio'] ) ){
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
 					$setor = "";
+					$monitor = @MonitorDAO::getMonitorByIDPC( $idComputador );
 					if(isset($responsavel)){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
-					
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
+					if($monitor != NULL){
+						$monitornome = $monitor->getMTNOME();
+						$monitorid = $monitor->getID();
+					}else{$monitornome = "Nao"; $monitorid = "";}
                     echo '<tr>
                         <td>'.$computador->getID().'</td>
                         <td>'.$computador->getPCNOME().'</td>
@@ -351,16 +372,16 @@ if( isset( $_REQUEST['pesquisarPCPatrimonio'] ) ){
 						
 						<td>'.$computador->getPCVIRTUAL().'</td>
 						<td>'.$computador->getPCSERVIDOR().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
-						<td>'.'monitor'.'</td>
+						<td><a href="../monitores.php#'.$monitorid.'">'.$monitornome.'</td>
                 
                         <td> 
-                            <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">
-                            <button class="button2">!</button></a>
+                           <a href="../computadores.php#'.$computador->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarComputador.php?excluir&idComputador='.$computador->getID().'">
+                            <a href="salvarComputador.php?excluir&idComputador='.$computador->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
@@ -406,7 +427,7 @@ if( isset( $_REQUEST['pesquisarPCSetor'] ) ){
 						  <th>Responsavel</th>
 						   <th>Setor</th>
 						    <th>Modelo</th>
-							<th>Maquina Virtual?</th>
+							<th>Virtual?</th>
 							<th>Servidor?</th>
 							<th>Host</th>
 						    <th>Descricao</th>
@@ -425,11 +446,18 @@ if( isset( $_REQUEST['pesquisarPCSetor'] ) ){
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
 					$setor = "";
+					$monitor = @MonitorDAO::getMonitorByIDPC( $idComputador );
 					if(isset($responsavel)){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
-					
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
+					if($monitor != NULL){
+						$monitornome = $monitor->getMTNOME();
+						$monitorid = $monitor->getID();
+					}else{$monitornome = "Nao"; $monitorid = "";}
                     echo '<tr>
                         <td>'.$computador->getID().'</td>
                         <td>'.$computador->getPCNOME().'</td>
@@ -451,16 +479,16 @@ if( isset( $_REQUEST['pesquisarPCSetor'] ) ){
 						
 						<td>'.$computador->getPCVIRTUAL().'</td>
 						<td>'.$computador->getPCSERVIDOR().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
-						<td>'.'monitor'.'</td>
+						<td><a href="../monitores.php#'.$monitorid.'">'.$monitornome.'</td>
                 
                         <td> 
-                            <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">
-                            <button class="button2">!</button></a>
+                            <a href="../computadores.php#'.$computador->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarComputador.php?excluir&idComputador='.$computador->getID().'">
+                            <a href="salvarComputador.php?excluir&idComputador='.$computador->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
@@ -534,6 +562,9 @@ if( isset( $_REQUEST['pesquisarMTPatrimonio'] ) ){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
 					
                     echo '<tr>
                         <td>'.$monitor->getID().'</td>
@@ -542,15 +573,15 @@ if( isset( $_REQUEST['pesquisarMTPatrimonio'] ) ){
 						<td>'.$responsavel->getRPNOME().'</td>						
 						<td>'.$setor->getSTNOME().'</td>						
 						<td>'.$modelo->getMDNOME().'</td>						
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="../computadores.php#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$monitor->getMTDESCRICAO().'</td>
                 
                         <td> 
-                            <a href="controller/salvarMonitor.php?editar&idMonitor='.$monitor->getID().'">
+                            <a href="../monitores.php#'.$monitor->getID().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
+                            <a href="salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
@@ -623,6 +654,9 @@ if( isset( $_REQUEST['pesquisarMTModelo'] ) ){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
 					
                     echo '<tr>
                         <td>'.$monitor->getID().'</td>
@@ -631,15 +665,15 @@ if( isset( $_REQUEST['pesquisarMTModelo'] ) ){
 						<td>'.$responsavel->getRPNOME().'</td>						
 						<td>'.$setor->getSTNOME().'</td>						
 						<td>'.$modelo->getMDNOME().'</td>						
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="../computadores.php#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$monitor->getMTDESCRICAO().'</td>
                 
                         <td> 
-                            <a href="controller/salvarMonitor.php?editar&idMonitor='.$monitor->getID().'">
-                            <button class="button2">!</button></a>
+                            <a href="../monitores.php#'.$monitor->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
+                            <a href="salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            
@@ -712,6 +746,9 @@ if( isset( $_REQUEST['pesquisarMTNome'] ) ){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
 					
                     echo '<tr>
                         <td>'.$monitor->getID().'</td>
@@ -720,15 +757,15 @@ if( isset( $_REQUEST['pesquisarMTNome'] ) ){
 						<td>'.$responsavel->getRPNOME().'</td>						
 						<td>'.$setor->getSTNOME().'</td>						
 						<td>'.$modelo->getMDNOME().'</td>						
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="../computadores.php#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$monitor->getMTDESCRICAO().'</td>
                 
                         <td> 
-                            <a href="controller/salvarMonitor.php?editar&idMonitor='.$monitor->getID().'">
-                            <button class="button2">!</button></a>
+                            <a href="../monitores.php#'.$monitor->getID().'">
+                            <button class="button2">></button></a>
                         </td>
                         <td>
-                            <a href="controller/salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
+                            <a href="salvarMonitor.php?excluir&idMonitor='.$monitor->getID().'">
                             <button class="button3">!</button></a>
                             </td>
                           </tr> ';            

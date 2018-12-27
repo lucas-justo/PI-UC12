@@ -1,5 +1,6 @@
 <?php
 include_once 'model/clsComputador.php';
+include_once 'model/clsMonitor.php';
 include_once 'model/clsCategoria.php';
 include_once 'model/clsModelo.php';
 include_once 'model/clsSetor.php';
@@ -11,7 +12,50 @@ include_once 'dao/clsModeloDAO.php';
 include_once 'dao/clsSetorDAO.php';
 include_once 'dao/clsResponsavelDAO.php';
 include_once 'dao/clsLocalizacaoDAO.php';
+include_once 'dao/clsMonitorDAO.php';
 include_once 'dao/clsConexao.php';
+error_reporting(~E_ALL & ~E_NOTICE);
+$nome = "";
+$ip = "";
+$cpu = 0;
+$memoria= "";
+$disco = "";
+$sistema = "";
+$servicos = "";
+$patrimonio = "";
+$descricao = "";
+$servidor = "";
+$virtual = "";
+$localizacao = 0;
+$idMonitor = 0;
+$pc = 0;
+$responsavel = 0;
+$modelo = 0;
+$action = "inserir";
+
+if( isset($_REQUEST['editar'])){
+    $idComputador = $_REQUEST['idComputador'];
+    $computadorEditar = ComputadorDAO::getComputadorById( $idComputador );
+    $nome = $computadorEditar->getPCNOME();
+	$ip = $computadorEditar->getPCIP();
+	$cpu = $computadorEditar->getPCCPU();
+	$memoria = $computadorEditar->getPCMEMORIA();
+	$disco = $computadorEditar->getPCDISCO();
+	$sistema = $computadorEditar->getPCSISOP();
+	$servicos = $computadorEditar->getPCSERVICOS();
+	$servidor = $computadorEditar->getPCSERVIDOR();
+	$virtual = $computadorEditar->getPCVIRTUAL();
+	$localizacao = $computadorEditar->getPCLOCALIZACAO();
+	$patrimonio = $computadorEditar->getPCPATRIMONIO();
+	$descricao = $computadorEditar->getPCDESCRICAO();
+	$idMonitor = $computadorEditar->getID();
+	$pc = $computadorEditar->getIDPC();
+	$responsavel = $computadorEditar->getIDRP();
+	$modelo = $computadorEditar->getIDMD();
+    $action = "editar&idComputador=".$idComputador;
+    
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -54,33 +98,33 @@ if( isset($_SESSION['logado']) &&
 
 					<!-- Formularios -->
 <div id="container_cadastros">
-	<form class="container_formularios" action="controller/salvarComputador.php?inserir" method="POST" >
+	<form class="container_formularios" action="controller/salvarComputador.php?<?php echo $action; ?>" method="POST" >
 	
 		<div class="modelos">	
 			<h2>Cadastrar um Computador</h2>
 			<label>Nome da Maquina : </label>
-			<input type="text" autocomplete="off" name="txtNome" />
+			<input type="text" autocomplete="off" name="txtNome" value="<?php echo $nome; ?>"/>
 
 			<label>Numero de CPUs : </label>
-			<input type="text" autocomplete="off" name="txtCPU" />
+			<input type="text" autocomplete="off" name="txtCPU" value="<?php echo $cpu; ?>"/>
 			
 			<label>Tamanho da Memoria : </label>
-			<input type="text" autocomplete="off" name="txtMemoria" />
+			<input type="text" autocomplete="off" name="txtMemoria" value="<?php echo $memoria; ?>"/>
 			
 			<label>Tamanho do Disco : </label>
-			<input type="text" autocomplete="off" name="txtDisco" />
+			<input type="text" autocomplete="off" name="txtDisco" value="<?php echo $disco; ?>"/>
 			
 			<label>Patrimonio : </label>
-			<input type="text" autocomplete="off" name="txtPatrimonio" />
+			<input type="text" autocomplete="off" name="txtPatrimonio" value="<?php echo $patrimonio; ?>"/>
 			
 			<label>Sistema Operacional : </label>
-			<input type="text" autocomplete="off" name="txtSistema" />
+			<input type="text" autocomplete="off" name="txtSistema" value="<?php echo $sistema; ?>"/>
 			
 			<label>IP Fixo (Se possuir) : </label>
-			<input type="text" autocomplete="off" name="txtIP" />
+			<input type="text" autocomplete="off" name="txtIP" value="<?php echo $ip; ?>"/>
 			
 			<label>Servicos : </label>
-			<input type="text" autocomplete="off" name="txtServicos" />		
+			<input type="text" autocomplete="off" name="txtServicos" value="<?php echo $servicos; ?>"/>		
 		</div>
 		
 		<div class="modelos">		
@@ -162,7 +206,7 @@ if( isset($_SESSION['logado']) &&
 			</select>
 			
 			<label>Descricao: </label>
-			<textarea id="descricao" name="txtDesc" >sem descricao</textarea>
+			<textarea id="descricao" name="txtDesc" ><?php echo $descricao; ?></textarea>
 			<input class="btnSalvar" type="submit" value="Salvar" />		
 		</div>		
 			
@@ -247,7 +291,7 @@ if( isset($_SESSION['logado']) &&
 						  <th>Responsavel</th>
 						   <th>Setor</th>
 						    <th>Modelo</th>
-							<th>Maquina Virtual?</th>
+							<th>Virtual?</th>
 							<th>Servidor?</th>
 							<th>Host</th>
 						    <th>Descricao</th>
@@ -268,13 +312,27 @@ if( isset($_SESSION['logado']) &&
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
 					$localizacao = @LocalizacaoDAO::getLocalizacaoById( $idLocalizacao );
 					$setor = "";
+					$monitorHost = $computador->getID();
+					$monitor = @MonitorDAO::getMonitorByIDPC( $monitorHost );
 					if(isset($responsavel)){
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
 					
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
+					
+					$monitornome = "Nao";
+					$monitorid = "";
+					
+					if($monitor != NULL){
+						$monitornome = $monitor->getMTNOME();
+						$monitorid = $monitor->getID();
+					}
+					
                     echo '<tr>
-                        <td>'.$computador->getID().'</td>
+                        <td id='.$computador->getID().' >'.$computador->getID().'</td>
                         <td>'.$computador->getPCNOME().'</td>
 						<td>'.$computador->getPCPATRIMONIO().'</td>
                         <td>'.$computador->getPCSISOP().'</td>
@@ -294,12 +352,12 @@ if( isset($_SESSION['logado']) &&
 						
 						<td>'.$computador->getPCVIRTUAL().'</td>
 						<td>'.$computador->getPCSERVIDOR().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$computador->getPCDESCRICAO().'</td>
-						<td>'.'monitor'.'</td>
+						<td><a href="monitores.php#'.$monitorid.'">'.$monitornome.'</td>
                 
                         <td> 
-                            <a href="controller/salvarComputador.php?editar&idComputador='.$computador->getID().'">
+                            <a href="?editar&idComputador='.$computador->getID().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>

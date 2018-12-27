@@ -31,17 +31,29 @@ class PontoDAO {
 	}
 	
 	public static function editar( $ponto ){
-        $sql = "INSERT INTO PONTOS "
-                . " ( PTCODIGO , PTIP , PTPORTA , PTPATRIMONIO ,  PTDESCRICAO , PTMAC , IDSETOR , IDMD , IDSWITCH ) VALUES "
-                . " ( " . $ponto->getPTCODIGO()." , "
-				. "  '" . $ponto->getPTIP()."' , "
-				. "  " . $ponto->getPTPORTA()." , "
-				. "  '" . $ponto->getPTPATRIMONIO()."' , "
-				. "  '" . $ponto->getPTDESCRICAO()."' , "
-				. "  '" . $ponto->getPTMAC()."' , "
-				. "  " . $ponto->getIDSETOR()." , "
-				. "  " . $ponto->getIDMD()." , "
-				. "  " . $ponto->getIDSWITCH()." ); ";
+			if($ponto->getIDSWITCH() == 0){
+			$ponto->setIDSWITCH('NULL');
+		}
+		
+			if($ponto->getIDSETOR() == 0){
+			$ponto->setIDSETOR('NULL');
+		}
+		
+			if($ponto->getIDMD() == 0){
+			$ponto->setIDMD('NULL');
+		}
+		
+        $sql =    "UPDATE PONTOS SET "
+                . " PTCODIGO = ".$ponto->getPTCODIGO()." , "
+				. " PTIP = '".$ponto->getPTIP()."' , "
+				. " PTPORTA = ".$ponto->getPTPORTA()." , "
+				. " PTPATRIMONIO = '".$ponto->getPTPATRIMONIO()."' , "
+				. " PTDESCRICAO = '".$ponto->getPTDESCRICAO()."' , "
+				. " PTMAC = '".$ponto->getPTMAC()."' , "
+				. " IDSETOR = ".$ponto->getIDSETOR()." , "
+				. " IDMD = ".$ponto->getIDMD()." , "
+				. " IDSWITCH = ".$ponto->getIDSWITCH()."  "
+                . " WHERE ID = ".$ponto->getID();
 				
         Conexao::executar($sql);
     }
@@ -77,13 +89,15 @@ class PontoDAO {
     }
 	
 	 public static function getPontoById( $idPonto ){
-        $sql = " SELECT ID, PTCODIGO , STIP , PTPORTA , PTPATRIMONIO ,  PTDESCRICAO , PTMAC , IDSETOR , IDMD , IDSWITCH"
+        $sql = " SELECT ID, PTCODIGO , PTIP , PTPORTA , PTPATRIMONIO ,  PTDESCRICAO , PTMAC , IDSETOR , IDMD , IDSWITCH"
              . " FROM PONTOS "
              . " WHERE ID = ".$idPonto
              . " ORDER BY PTCODIGO ";
         
         $result = Conexao::consultar($sql);
-      
+		$ponto = NULL;
+		
+		if( $result != NULL){
         list( $_ID, $_PTCODIGO , $_PTIP , $_PTPORTA , $_PTPATRIMONIO , $_PTDESCRICAO , $_PTMAC , $_IDSETOR , $_IDMD , $_IDSWITCH  ) = mysqli_fetch_row($result);
                 $ponto = new Ponto();
                 $ponto->setID($_ID);
@@ -95,7 +109,7 @@ class PontoDAO {
 				$ponto->setIDSETOR($_IDSETOR);
 				$ponto->setIDMD($_IDMD);
 				$ponto->setIDSWITCH($_IDSWITCH);
-            
+		}
         return $ponto;
     }
 	

@@ -26,6 +26,16 @@ class MonitorDAO {
 	}
 	
 	public static function editar( $monitor ){
+		if($monitor->getIDPC() == 0){
+		$monitor->setIDPC('NULL');
+		}
+		if($monitor->getIDRP() == 0){
+		$monitor->setIDRP('NULL');
+		}
+		if($monitor->getIDMD() == 0){
+		$monitor->setIDMD('NULL');
+		}
+		
         $sql =    "UPDATE MONITORES SET "
                 . " MTNOME = '".$monitor->getMTNOME()."' , "
 				. " MTPATRIMONIO = '".$monitor->getMTPATRIMONIO()."' , "
@@ -71,7 +81,10 @@ class MonitorDAO {
              . " ORDER BY MTNOME ";
         
         $result = Conexao::consultar($sql);
-      
+		
+		$monitor = NULL;
+		
+		if( $result != NULL){
         list( $_ID, $_MTNOME , $_MTPATRIMONIO , $_MTDESCRICAO , $_IDPC , $_IDRP , $_IDMD ) = mysqli_fetch_row($result);
                 $monitor = new Monitor();
                 $monitor->setID($_ID);
@@ -81,7 +94,30 @@ class MonitorDAO {
 				$monitor->setIDPC($_IDPC);
 				$monitor->setIDRP($_IDRP);
 				$monitor->setIDMD($_IDMD);
-            
+		}
+        return $monitor;
+    }
+	
+	 public static function getMonitorByIDPC( $monitorHost ){
+        $sql = " SELECT  ID , MTNOME ,  MTPATRIMONIO , MTDESCRICAO , IDPC , IDRP , IDMD "
+             . " FROM MONITORES "
+             . " WHERE IDPC = ".$monitorHost;
+        
+        $result = Conexao::consultar($sql);
+		
+		$monitor = NULL;
+		
+		if( $result != NULL){
+        list( $_ID, $_MTNOME , $_MTPATRIMONIO , $_MTDESCRICAO , $_IDPC , $_IDRP , $_IDMD ) = mysqli_fetch_row($result);
+                $monitor = new Monitor();
+                $monitor->setID($_ID);
+				$monitor->setMTNOME($_MTNOME);
+				$monitor->setMTPATRIMONIO($_MTPATRIMONIO);
+				$monitor->setMTDESCRICAO($_MTDESCRICAO);
+				$monitor->setIDPC($_IDPC);
+				$monitor->setIDRP($_IDRP);
+				$monitor->setIDMD($_IDMD);
+		}
         return $monitor;
     }
 	

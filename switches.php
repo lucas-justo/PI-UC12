@@ -10,6 +10,32 @@ include_once 'dao/clsSetorDAO.php';
 include_once 'dao/clsSwitchDAO.php';
 include_once 'dao/clsLocalizacaoDAO.php';
 include_once 'dao/clsConexao.php';
+
+$idSwitch = 0;
+$nome = "";
+$patrimonio = "";
+$descricao = "";
+$ip = "";
+$usuario = "";
+$senha = "";
+$_setor = 0;
+$_modelo = 0;
+$action = "inserir";
+
+if( isset($_REQUEST['editar'])){
+    $idSwitch = $_REQUEST['idSwitch'];
+    $switchEditar = SwitchDAO::getSwitchById( $idSwitch );
+    $nome = $switchEditar->getSTCODIGO();
+	$patrimonio = $switchEditar->getSTPATRIMONIO();
+	$descricao = $switchEditar->getSTDESCRICAO();
+	$idPonto = $switchEditar->getID();
+	$ip = $switchEditar->getSTIP();
+	$usuario = $switchEditar->getSTUSER();
+	$senha = $switchEditar->getSTSENHA();
+	$_setor = $switchEditar->getIDSETOR();
+	$_modelo = $switchEditar->getIDMD();
+    $action = "editar&idSwitch=".$idSwitch;    
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -49,19 +75,19 @@ if( isset($_SESSION['logado']) &&
 </div>	
 <h2> Cadastrar Switches </h2>	
 <div id="container_cadastros">
-	<form class="container_formularios" action="controller/salvarSwitch.php?inserir" method="POST" >
+	<form class="container_formularios" action="controller/salvarSwitch.php?<?php echo $action; ?>" method="POST" >
 	
 		<div class="modelos">		
 		<label>Nome ou Codigo de Identificacao do Switch : </label>
-        <input type="number" autocomplete="off" name="txtNome" />
+        <input type="number" autocomplete="off" name="txtNome" value="<?php echo $nome; ?>"/>
 		<label>Patrimonio : </label>
-        <input type="text" autocomplete="off" name="txtPatrimonio"  />
+        <input type="text" autocomplete="off" name="txtPatrimonio"  value="<?php echo $patrimonio; ?>"/>
 		<label>Usuario : </label>
-        <input type="text" autocomplete="off" name="txtUser" />
+        <input type="text" autocomplete="off" name="txtUser" value="<?php echo $usuario; ?>"/>
 		<label>Senha : </label>
-        <input type="text" autocomplete="off" name="txtSenha" />
+        <input type="text" autocomplete="off" name="txtSenha" value="<?php echo $senha; ?>"/>
 		<label>IP Fixo : </label>
-        <input type="text" autocomplete="off" name="txtIP" />
+        <input type="text" autocomplete="off" name="txtIP" value="<?php echo $ip; ?>"/>
 		
 		
 			<label>Modelo : </label>
@@ -99,7 +125,7 @@ if( isset($_SESSION['logado']) &&
 			</select>
 			
 		<label>Descricao: </label>
-        <textarea id="descricao" name="txtDesc" > </textarea>
+        <textarea id="descricao" name="txtDesc" ><?php echo $descricao; ?></textarea>
 		        <input class="btnSalvar" type="submit" value="Salvar" />
 		</div>
 		</form>
@@ -134,20 +160,25 @@ if( isset($_SESSION['logado']) &&
 					$idModelo = $switch->getIDMD();
 					$setor = @SetorDAO::getSetorById( $idSetor );
 					$modelo = @ModeloDAO::getModeloById( $idModelo );
-					
+					if($setor != NULL){
+						$setorname = $setor->getSTNOME();
+					}else{$setorname = "X";}
+					if($modelo != NULL){
+						$modeloname = $modelo->getMDNOME();
+					}else{$modeloname = "Nao";}
                     echo '<tr>
                         <td>'.$switch->getID().'</td>
                         <td>'.$switch->getSTCODIGO().'</td>
-						<td>'.$modelo->getMDNOME().'</td>
+						<td>'.$modeloname.'</td>
 						<td>'.$switch->getSTPATRIMONIO().'</td>
 						<td>'.$switch->getSTIP().'</td>
-						<td>'.$setor->getSTNOME().'</td>
+						<td>'.$setorname.'</td>
 						<td>'.$switch->getSTUSER().'</td>
 						<td>'.$switch->getSTSENHA().'</td>
 						<td>'.$switch->getSTDESCRICAO().'</td>
                 
                         <td>
-                            <a href="controller/salvarSwitch.php?editar&idSwitch='.$switch->getID().'">
+                             <a href="?editar&idSwitch='.$switch->getID().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>

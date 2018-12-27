@@ -18,6 +18,11 @@ th{
 	border-radius: 2px;
 }
 
+td{
+	padding: 2px;
+	text-align:center;
+}
+
 tr{
 	padding: 8px;
 	color: #334c3b;
@@ -65,7 +70,9 @@ hr {
 	margin: 10px;	
 }
 
-
+:target {
+   background-color: #ffa;
+}
 
 /* botoes e menus */
 
@@ -79,7 +86,6 @@ hr {
 	color:#cedaed;
 	text-align: center;
 	list-style: none;
-
 }
 
 .menu:hover{

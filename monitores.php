@@ -14,6 +14,30 @@ include_once 'dao/clsSetorDAO.php';
 include_once 'dao/clsResponsavelDAO.php';
 include_once 'dao/clsLocalizacaoDAO.php';
 include_once 'dao/clsConexao.php';
+
+$nome = "";
+$patrimonio = "";
+$descricao = "";
+$idMonitor = 0;
+$pc = 0;
+$responsavel = 0;
+$modelo = 0;
+$action = "inserir";
+
+if( isset($_REQUEST['editar'])){
+    $idMonitor = $_REQUEST['idMonitor'];
+    $monitorEditar = MonitorDAO::getMonitorById( $idMonitor );
+    $nome = $monitorEditar->getMTNOME();
+	$patrimonio = $monitorEditar->getMTPATRIMONIO();
+	$descricao = $monitorEditar->getMTDESCRICAO();
+	$idMonitor = $monitorEditar->getID();
+	$pc = $monitorEditar->getIDPC();
+	$responsavel = $monitorEditar->getIDRP();
+	$modelo = $monitorEditar->getIDMD();
+    $action = "editar&idMonitor=".$idMonitor;
+    
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -54,12 +78,12 @@ if( isset($_SESSION['logado']) &&
 </div>
 <h2>Cadastrar Monitor</h2>	
 <div id="container_cadastros">
-	<form class="container_formularios" action="controller/salvarMonitor.php?inserir" method="POST" >
+	<form class="container_formularios" action="controller/salvarMonitor.php?<?php echo $action; ?>" method="POST" >
 		<div class="modelos">	
 		<label>Nome: </label>
-        <input type="text" autocomplete="off" name="txtNome" />
+        <input type="text" autocomplete="off" name="txtNome" value="<?php echo $nome; ?>" />
 		<label>Patrimonio: </label>
-        <input type="text" autocomplete="off" name="txtPatrimonio" />
+        <input type="text" autocomplete="off" name="txtPatrimonio" value="<?php echo $patrimonio; ?>"/>
 			<label>Modelo : </label>
 			<select name="stModelo" >			
 				<?php 
@@ -116,7 +140,7 @@ if( isset($_SESSION['logado']) &&
 		
 			
 		<label>Descricao: </label>
-        <textarea id="descricao" name="txtDesc" > </textarea>
+        <textarea id="descricao" name="txtDesc" ><?php echo $descricao; ?> </textarea>
 		
 		<input class="btnSalvar" type="submit" value="Salvar" />
 		</div>		 
@@ -161,19 +185,22 @@ if( isset($_SESSION['logado']) &&
 						$idSetor = $responsavel->getIDSETOR();
 						$setor = @SetorDAO::getSetorById( $idSetor );
 					}
+					if($host != NULL){
+						$hostname = $host->getPCNOME();
+					}else{$hostname = "X";}
 					
                     echo '<tr>
                         <td>'.$monitor->getID().'</td>
                         <td>'.$monitor->getMTNOME().'</td>
 						<td>'.$modelo->getMDNOME().'</td>
-						<td>'.$host->getPCNOME().'</td>
+						<td><a href="computadores.php#'.$idComputador.'">'.$hostname.'</td>
 						<td>'.$monitor->getMTPATRIMONIO().'</td>
                         <td>'.$responsavel->getRPNOME().'</td>
 						<td>'.$setor->getSTNOME().'</td>
 						<td>'.$monitor->getMTDESCRICAO().'</td>
                 
                         <td> 
-                            <a href="controller/salvarMonitor.php?editar&idMonitor='.$monitor->getID().'">
+                             <a href="?editar&idMonitor='.$monitor->getID().'">
                             <button class="button2">!</button></a>
                         </td>
                         <td>

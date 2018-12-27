@@ -25,19 +25,27 @@ class SwitchDAO {
         Conexao::executar($sql);
 	}
 	
-	public static function editar( $switch ){
-        $sql = "INSERT INTO SWITCHES "
-                . " ( STCODIGO , STIP , STUSER , STSENHA , STPATRIMONIO ,  STDESCRICAO , IDSETOR , IDMD ) VALUES "
-                . " ( '" . $switch->getSTCODIGO()."' , "
-				. "  '" . $switch->getSTIP()."' , "
-				. "  '" . $switch->getSTUSER()."' , "
-				. "  '" . $switch->getSTSENHA()."' , "
-				. "  '" . $switch->getSTPATRIMONIO()."' , "
-				. "  '" . $switch->getSTDESCRICAO()."' , "
-				. "  " . $switch->getIDSETOR()." , "
-				. "  " . $switch->getIDMD()." ); ";
+	public static function editar( $switch ){		
+			if($switch->getIDSETOR() == 0){
+			$switch->setIDSETOR('NULL');
+		}		
+			if($switch->getIDMD() == 0){
+			$switch->setIDMD('NULL');
+		}
+		
+        $sql =    "UPDATE SWITCHES SET "
+                . " STCODIGO = '".$switch->getSTCODIGO()."' , "
+				. " STIP = '".$switch->getSTIP()."' , "
+				. " STUSER = '".$switch->getSTUSER()."' , "
+				. " STPATRIMONIO = '".$switch->getSTPATRIMONIO()."' , "
+				. " STDESCRICAO = '".$switch->getSTDESCRICAO()."' , "
+				. " STSENHA = '".$switch->getSTSENHA()."' , "
+				. " IDSETOR = ".$switch->getIDSETOR()." , "
+				. " IDMD = ".$switch->getIDMD()." "
+                . " WHERE ID = ".$switch->getID();
 				
         Conexao::executar($sql);
+    
     }
 	
 	public static function excluir( $idSwitch ){

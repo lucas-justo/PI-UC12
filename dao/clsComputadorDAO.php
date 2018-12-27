@@ -40,9 +40,24 @@ class ComputadorDAO {
 	}
 	
 	public static function editar( $computador ){
+			if($computador->getIDPC() == 0){
+		$computador->setIDPC('NULL');
+		}
+		
+		if($computador->getIDRP() == 0){
+		$computador->setIDRP('NULL');
+		}
+		
+		if($computador->getIDMD() == 0){
+		$computador->setIDMD('NULL');
+		}
+		
+		if($computador->getPCLOCALIZACAO() == 0){
+		$computador->setPCLOCALIZACAO('NULL');
+		}
+		
         $sql =    "UPDATE COMPUTADORES SET "
                 . " PCNOME = '".$computador->getPCNOME()."' , "
-				. " PCMODELO = '".$computador->getPCMODELO()."' , "
 				. " PCPATRIMONIO = '".$computador->getPCPATRIMONIO()."' , "
 				. " PCDESCRICAO = '".$computador->getPCDESCRICAO()."' , "
 				. " PCSISOP = '".$computador->getPCSISOP()."' , "
@@ -135,7 +150,9 @@ class ComputadorDAO {
              . " ORDER BY PCNOME ";
         
         $result = Conexao::consultar($sql);
-      
+		$monitor = NULL;
+		
+		if( $result != NULL){
         list( $_ID, $_PCNOME , $_PCPATRIMONIO ,  $_PCDESCRICAO , $_PCSISOP , $_PCCPU , $_PCMEMORIA ,  $_PCDISCO , $_PCLOCALIZACAO , $_PCVIRTUAL , $_PCSERVIDOR , $_PCIP , $_PCSERVICOS , $_IDPC , $_IDRP , $_IDMD  ) = mysqli_fetch_row($result);
                 $computador = new Computador();
                 $computador->setID($_ID);
@@ -153,9 +170,8 @@ class ComputadorDAO {
 				$computador->setPCSERVICOS($_PCSERVICOS);
 				$computador->setIDPC($_IDPC);
 				$computador->setIDRP($_IDRP);
-				$computador->setIDMD($_IDMD);
-				
-            
+				$computador->setIDMD($_IDMD);				
+		}
         return $computador;
     }
 	
